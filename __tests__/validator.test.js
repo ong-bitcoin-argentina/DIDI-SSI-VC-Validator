@@ -1,72 +1,15 @@
 const { validateCredential } = require('../src/validator');
+const { phoneSchema } = require('../src/schema/phone/phone-schema-v1.js');
 
-const schema = {
-    type: "object",
-    properties: {
-      foo: {type: "integer"},
-      bar: {type: "string"}
-    },
-    required: ["foo"],
-    additionalProperties: false
-  }
+const phoneJwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NkstUiJ9.eyJpYXQiOjE2MzA0NDU2OTIsInN1YiI6ImRpZDpldGhyOjB4ODRiMmYxYzM0MzE3NmQyNjRhMThlOWRmMGZmZGE4MDM0ZDc3N2ZiNiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIl0sInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiUGhvbmUiOnsicHJldmlldyI6eyJ0eXBlIjowLCJmaWVsZHMiOlsicGhvbmVOdW1iZXIiXX0sImNhdGVnb3J5IjoiaWRlbnRpdHkiLCJkYXRhIjp7InBob25lTnVtYmVyIjoiKzU0MjQ5NDYwMzI4NiJ9fX19LCJpc3MiOiJkaWQ6ZXRocjoweDJiMTg0MjAzYmFiZWZlMzA2OTAxYTc2YjA1M2JjMzg2NTllNGE3OTUifQ.xxCd7H-wdSZyO60h7IUZpi4FjhrphZS45N_pRKXsfGSWo5_X_DvMysdaT1ykJRH2UkoEoPFEAAbDi953buLFgwE'
+const phoneJwtFail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzA0NDU2OTIsInN1YiI6ImRpZDpldGhyOjB4ODRiMmYxYzM0MzE3NmQyNjRhMThlOWRmMGZmZGE4MDM0ZDc3N2ZiNiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIl0sInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiUGhvbmUiOnsicHJldmlldyI6eyJ0eXBlIjoiMCIsImZpZWxkcyI6WyJwaG9uZU51bWJlciJdfSwiY2F0ZWdvcnkiOiJpZGVudGl0eSIsImRhdGEiOnsicGhvbmVOdW1iZXIiOiIrNTQyNDk0NjAzMjg2In19fX0sImlzcyI6ImRpZDpldGhyOjB4MmIxODQyMDNiYWJlZmUzMDY5MDFhNzZiMDUzYmMzODY1OWU0YTc5NSJ9.a4TlMDDkgmQBwh4E0UoA83o_WiaH2dmO1qZIAYDOASE'
 
-const phoneSchema = {
-    type: "object",
-    iat: {type: "int32"}, //1630445692,
-    sub: {type: "string"}, //"did:ethr:0x84b2f1c343176d264a18e9df0ffda8034d777fb6",
-    vc: {
-        type: "object",
-        // "@context": [
-        //     "https://www.w3.org/2018/credentials/v1"
-        // ],
-        type: { elements: { type: "string" } }, //["VerifiableCredential"],
-        credentialSubject: {
-            type: "object",
-            Phone: {
-                type: "object",
-                preview: {
-                    type: {type: "int32"}, //0,
-                    fields: { elements: { type: "string" } },//[ "phoneNumber" ]
-                },
-                category: {type: "string"},//"identity",
-                data: {
-                    phoneNumber: {type: "int32"}, //"+542494603286"
-                }
-            }
-        }
-    },
-    iss: {type: "string"} //"did:ethr:0x2b184203babefe306901a76b053bc38659e4a795"
-}
-  
-const phoneData = {
-    iat: 1630445692,
-    sub: "did:ethr:0x84b2f1c343176d264a18e9df0ffda8034d777fb6",
-    vc: {
-      "@context": [
-        "https://www.w3.org/2018/credentials/v1"
-      ],
-      type: [
-        "VerifiableCredential"
-      ],
-      credentialSubject: {
-        Phone: {
-          preview: {
-            type: 0,
-            fields: [
-              "phoneNumber"
-            ]
-          },
-          category: "identity",
-          data: {
-            "phoneNumber": "+542494603286"
-          }
-        }
-      }
-    },
-    iss: "did:ethr:0x2b184203babefe306901a76b053bc38659e4a795"
-}
-
-test('Validate', async () => {
-    result = await validateCredential(phoneSchema, phoneData);
+test('Validate OK', async () => {
+    result = await validateCredential(phoneSchema, phoneJwt);
     expect(result).toBe(true);
+});
+
+test('Validate FAIL', async () => {
+    result = await validateCredential(phoneSchema, phoneJwtFail);
+    expect(result).toBe(false);
 });
