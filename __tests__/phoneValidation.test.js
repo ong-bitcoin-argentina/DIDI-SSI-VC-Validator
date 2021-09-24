@@ -10,6 +10,7 @@ const phoneIssFieldFail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzA0
 test('Validate OK', async () => {
     result = await validateCredential(phoneSchema, phoneJwt);
     expect(result.status).toBe(true);
+    expect(result.errors).toBe(null);
 });
 
 test('Validate iat field FAIL', async () => {

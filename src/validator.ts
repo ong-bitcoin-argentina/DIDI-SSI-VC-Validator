@@ -1,7 +1,12 @@
 import Ajv from "ajv"
 import jwt_decode from 'jwt-decode';
 
-export function validateCredential(schema: object, jwt: string): object {
+type ValidateCredentialType = {
+  status: boolean;
+  errors: any;
+}
+
+export function validateCredential(schema: object, jwt: string): ValidateCredentialType {
   const ajv = new Ajv()
   const validate = ajv.compile(schema)   
   let decoded = jwt_decode(jwt)
@@ -9,8 +14,11 @@ export function validateCredential(schema: object, jwt: string): object {
   if (!valid) {
     return {
       status: false,
-      errors: validate.errors 
+      errors: validate.errors
     }
   }
-  return { status: true };
+  return { 
+    status: true,
+    errors: null
+  };
 }
