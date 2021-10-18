@@ -1,5 +1,5 @@
 module.exports = {
-  emailSchema: {
+  identitySchema: {
       "type": "object",
       "properties": {
         "iat": {
