@@ -1,4 +1,4 @@
-import Ajv from "ajv"
+import Ajv from "ajv";
 import jwt_decode from 'jwt-decode';
 
 type ValidateCredentialType = {
