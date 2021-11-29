@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "ajv": "^6.12.6",
+    "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2"
   }
 }
