@@ -1,5 +1,4 @@
 export const v2 = {
-  legalAddressSchema: {
       "type": "object",
       "properties": {
         "iat": {
@@ -129,11 +128,9 @@ export const v2 = {
         "vc",
         "iss"
       ]
-    }
 }
 
 export const v1 = {
-  addressSchema: {
       "type": "object",
       "properties": {
         "iat": {
@@ -262,5 +259,4 @@ export const v1 = {
         "vc",
         "iss"
       ]
-    }
 }

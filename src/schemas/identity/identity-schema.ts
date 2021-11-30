@@ -1,5 +1,4 @@
 export const v1 = {
-  identitySchema: {
       "type": "object",
       "properties": {
         "iat": {
@@ -108,5 +107,4 @@ export const v1 = {
         "vc",
         "iss"
       ]
-    }
 }

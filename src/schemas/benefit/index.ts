@@ -1,1 +1,1 @@
-export * as semillaSembTitular from './semillaSembFamiliar-schema';
+export * as semillaSembFamiliar from './semillaSembFamiliar-schema';

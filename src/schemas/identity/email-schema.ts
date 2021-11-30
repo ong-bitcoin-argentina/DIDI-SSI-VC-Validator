@@ -1,5 +1,4 @@
 export const v1 = {
-  emailSchema: {
         "type": "object",
         "properties": {
           "iat": {
@@ -96,5 +95,4 @@ export const v1 = {
           "vc",
           "iss"
         ]
-      }
 }

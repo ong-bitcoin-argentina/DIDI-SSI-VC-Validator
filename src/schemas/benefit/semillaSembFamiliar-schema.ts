@@ -1,5 +1,4 @@
 export const v1 = {
-  semillaSembFamiliarSchema: {
       "type": "object",
       "properties": {
         "iat": {
@@ -111,5 +110,4 @@ export const v1 = {
         "vc",
         "iss"
       ]
-    }
 }
