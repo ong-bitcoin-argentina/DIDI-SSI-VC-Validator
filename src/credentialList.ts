@@ -1,6 +1,6 @@
 import * as schemas from './schemas';
 
-export function getTypes():string[]  {
+export function getTypes(): string[]  {
   let types: string[] = [];
   Object.values(schemas).forEach((category: object) => {
     types = [...types, ...Object.keys(category)]
@@ -8,12 +8,12 @@ export function getTypes():string[]  {
   return types;
 }
 
-export async function getCategories(): Promise<string[]>  {
+export function getCategories(): string[]  {
   const categories: string[] = Object.keys(schemas);
   return categories;
 }
 
-export async function getVersions(category: string, type: string): Promise<string[]> {
+export function getVersions(category: string, type: string): string[] {
   // @ts-ignore
   if (!schemas[category] || !schemas[category][type]) {
     throw new Error('#vcValidator-getVersions-categoryAndTypeNotFound');
