@@ -1,5 +1,6 @@
-const { validateCredential } = require('../src/validator');
-const {emailSchema } = require('../src/schema/email/email-schema-v1.js');
+import { validateCredential } from '../src';
+import { emailMain } from '../src/schemas/identity';
+
 const emailJwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NkstUiJ9.eyJpYXQiOjE1OTUzNDY1NDksInN1YiI6ImRpZDpldGhyOjB4M2JjNzhmYmYyYjE0MTk1Zjg5NzFkNmMyNTUxMDkzZTUyYzg3OWI4YiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIl0sInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiRW1haWwiOnsicHJldmlldyI6eyJ0eXBlIjowLCJmaWVsZHMiOlsiZW1haWwiXX0sImNhdGVnb3J5IjoiaWRlbnRpdHkiLCJkYXRhIjp7ImVtYWlsIjoiYXhlbGJhdTI0QGdtYWlsLmNvbSJ9fX19LCJpc3MiOiJkaWQ6ZXRocjoweDUxMDllMzcwMTVjOTE1Y2EyZmQ1ODVhNDEwNWNmNTRlYWJjYTE3ZjgifQ.29Im_8dfSnMiI3qTqM9rHjBAMHmwM90pmIfY8dsPDspZIaApMpseVvEwf4qZSapZcHUpkUqPldU5q6tJuki_qwA';
 const emailIatFieldFail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOiIxNTk1MzQ2NTQ5Iiwic3ViIjoiZGlkOmV0aHI6MHgzYmM3OGZiZjJiMTQxOTVmODk3MWQ2YzI1NTEwOTNlNTJjODc5YjhiIiwidmMiOnsiQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiXSwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCJdLCJjcmVkZW50aWFsU3ViamVjdCI6eyJFbWFpbCI6eyJwcmV2aWV3Ijp7InR5cGUiOjAsImZpZWxkcyI6WyJlbWFpbCJdfSwiY2F0ZWdvcnkiOiJpZGVudGl0eSIsImRhdGEiOnsiZW1haWwiOiJheGVsYmF1MjRAZ21haWwuY29tIn19fX0sImlzcyI6ImRpZDpldGhyOjB4NTEwOWUzNzAxNWM5MTVjYTJmZDU4NWE0MTA1Y2Y1NGVhYmNhMTdmOCJ9.YM6OBKzXM8PJntfj0B2dR656TJ6WHgD1Llg6rOI2L_0';
 const emailSubFieldFail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTUzNDY1NDksInN1YiI6My43ODE0MTk1ODk3MTU1MTA3ZSsyMSwidmMiOnsiQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiXSwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCJdLCJjcmVkZW50aWFsU3ViamVjdCI6eyJFbWFpbCI6eyJwcmV2aWV3Ijp7InR5cGUiOjAsImZpZWxkcyI6WyJlbWFpbCJdfSwiY2F0ZWdvcnkiOiJpZGVudGl0eSIsImRhdGEiOnsiZW1haWwiOiJheGVsYmF1MjRAZ21haWwuY29tIn19fX0sImlzcyI6ImRpZDpldGhyOjB4NTEwOWUzNzAxNWM5MTVjYTJmZDU4NWE0MTA1Y2Y1NGVhYmNhMTdmOCJ9.bFuhSxsvlB-Maii1edLdhb_gCgUcC4bbjwWL3njrpmY';
@@ -9,13 +10,13 @@ const emailIssFieldFail = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTUz
 
 
 test('Validate ok', async () => {
-    result = await validateCredential(emailSchema, emailJwt);
-    expect(result.status).toBe(true);
-    expect(result.errors).toBe(null);
+  const result = await validateCredential(emailMain.v1, emailJwt);
+  expect(result.status).toBe(true);
+  expect(result.errors).toBe(null);
 });
 
 test('Validate iat field FAIL', async () => {
-  result = await validateCredential(emailSchema, emailIatFieldFail);
+  const result = await validateCredential(emailMain.v1, emailIatFieldFail);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe('.iat');
@@ -26,7 +27,7 @@ test('Validate iat field FAIL', async () => {
 });
 
 test('Validate sub field FAIL', async() => {
-  result = await validateCredential(emailSchema, emailSubFieldFail);
+  const result = await validateCredential(emailMain.v1, emailSubFieldFail);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe('.sub');
@@ -36,7 +37,7 @@ test('Validate sub field FAIL', async() => {
 });
 
 test('Validate vc.credentialSubject.Email.preview.type field FAIL', async() =>{
-  result = await validateCredential(emailSchema, emailJwtTypeFieldPreviewFail);
+  const result = await validateCredential(emailMain.v1, emailJwtTypeFieldPreviewFail);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe('.vc.credentialSubject.Email.preview.type');
@@ -46,7 +47,7 @@ test('Validate vc.credentialSubject.Email.preview.type field FAIL', async() =>{
 });
 
 test('Validate vc.credentialSubject.Email.data.email field FAIL', async() =>{
-  result = await validateCredential(emailSchema, emailJwtTypeFieldDataFail);
+  const result = await validateCredential(emailMain.v1, emailJwtTypeFieldDataFail);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe('.vc.credentialSubject.Email.data.email');
@@ -56,7 +57,7 @@ test('Validate vc.credentialSubject.Email.data.email field FAIL', async() =>{
 });
 
 test('Validate sub field FAIL', async() => {
-  result = await validateCredential(emailSchema, emailIssFieldFail);
+  const result = await validateCredential(emailMain.v1, emailIssFieldFail);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe('.iss');

@@ -1,6 +1,4 @@
-module.exports = {
-
-  phoneSchema: {
+export const v1 = {
     "type": "object",
     "properties": {
       "iat": {
@@ -98,4 +96,3 @@ module.exports = {
       "iss"
     ]
   }
-}

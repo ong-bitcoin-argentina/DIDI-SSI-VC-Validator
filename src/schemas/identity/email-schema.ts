@@ -1,5 +1,4 @@
 export const v1 = {
-    semillaIdFamiliarSchema: {
         "type": "object",
         "properties": {
           "iat": {
@@ -30,7 +29,7 @@ export const v1 = {
               "credentialSubject": {
                 "type": "object",
                 "properties": {
-                  "Identidad Familiar": {
+                  "Email": {
                     "type": "object",
                     "properties": {
                       "preview": {
@@ -59,47 +58,12 @@ export const v1 = {
                       "data": {
                         "type": "object",
                         "properties": {
-                          "credentialName": {
-                            "type": "string"
-                          },
-                          "dni": {
-                            "type": "string"
-                          },
-                          "givenName": {
-                            "type": "string"
-                          },
-                          "familyName": {
-                            "type": "string"
-                          },
-                          "holderRelation": {
-                            "type": "string"
-                          },
-                          "beneficiaryDni": {
-                            "type": "string"
-                          },
-                          "beneficiaryGivenName": {
-                            "type": "string"
-                          },
-                          "beneficiaryFamilyName": {
-                            "type": "string"
-                          },
-                          "gender": {
-                            "type": "string"
-                          },
-                          "birthDate": {
+                          "email": {
                             "type": "string"
                           }
                         },
                         "required": [
-                            "credentialName",
-                            "dni",
-                            "givenName",
-                            "familyName",
-                            "holderRelation",
-                            "beneficiaryDni",
-                            "beneficiaryGivenName",
-                            "beneficiaryFamilyName",
-                            "birthDate"
+                          "email"
                         ]
                       }
                     },
@@ -111,7 +75,7 @@ export const v1 = {
                   }
                 },
                 "required": [
-                  "Identidad Familiar"
+                  "Email"
                 ]
               }
             },
@@ -131,5 +95,4 @@ export const v1 = {
           "vc",
           "iss"
         ]
-      }
-  }
+}

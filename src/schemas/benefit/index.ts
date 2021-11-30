@@ -1,0 +1,1 @@
+export * as semillaSembFamiliar from './semillaSembFamiliar-schema';

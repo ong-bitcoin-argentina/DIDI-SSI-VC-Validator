@@ -1,5 +1,4 @@
-module.exports = {
-  identitySchema: {
+export const v1 = {
       "type": "object",
       "properties": {
         "iat": {
@@ -108,5 +107,4 @@ module.exports = {
         "vc",
         "iss"
       ]
-    }
 }

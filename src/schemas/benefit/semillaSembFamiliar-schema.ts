@@ -1,5 +1,4 @@
-module.exports = {
-  addressSchema: {
+export const v1 = {
       "type": "object",
       "properties": {
         "iat": {
@@ -30,7 +29,7 @@ module.exports = {
             "credentialSubject": {
               "type": "object",
               "properties": {
-                "Domicilio Legal": {
+                "Sembrado Familiar": {
                   "type": "object",
                   "properties": {
                     "preview": {
@@ -59,44 +58,27 @@ module.exports = {
                     "data": {
                       "type": "object",
                       "properties": {
-                        "streetAddress": {
+                        "credentialName": {
                           "type": "string"
                         },
-                        "numberStreet": {
+                        "beneficiaryDNI": {
                           "type": "string"
                         },
-                        "floor": {
+                        "benefitHolderType": {
                           "type": "string"
                         },
-                        "department": {
+                        "givenName": {
                           "type": "string"
                         },
-                        "zipCode": {
-                          "type": "string"
-                        },
-                        "city": {
-                          "type": "string"
-                        },
-                        "municipality": {
-                          "type": "string"
-                        },
-                        "province": {
-                          "type": "string"
-                        },
-                        "country": {
+                        "familyName": {
                           "type": "string"
                         }
                       },
                       "required": [
-                        "streetAddress",
-                        "numberStreet",
-                        "floor",
-                        "department",
-                        "zipCode",
-                        "city",
-                        "municipality",
-                        "province",
-                        "country"
+                        "credentialName",
+                        "beneficiaryDNI",
+                        "givenName",
+                        "familyName"
                       ]
                     }
                   },
@@ -108,7 +90,7 @@ module.exports = {
                 }
               },
               "required": [
-                "Domicilio Legal"
+                "Sembrado Familiar"
               ]
             }
           },
@@ -128,5 +110,4 @@ module.exports = {
         "vc",
         "iss"
       ]
-    }
 }

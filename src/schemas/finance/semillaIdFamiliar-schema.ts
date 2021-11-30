@@ -1,5 +1,4 @@
-module.exports = {
-    emailSchema: {
+export const v1 = {
         "type": "object",
         "properties": {
           "iat": {
@@ -30,7 +29,7 @@ module.exports = {
               "credentialSubject": {
                 "type": "object",
                 "properties": {
-                  "Email": {
+                  "Identidad Familiar": {
                     "type": "object",
                     "properties": {
                       "preview": {
@@ -59,12 +58,47 @@ module.exports = {
                       "data": {
                         "type": "object",
                         "properties": {
-                          "email": {
+                          "credentialName": {
+                            "type": "string"
+                          },
+                          "dni": {
+                            "type": "string"
+                          },
+                          "givenName": {
+                            "type": "string"
+                          },
+                          "familyName": {
+                            "type": "string"
+                          },
+                          "holderRelation": {
+                            "type": "string"
+                          },
+                          "beneficiaryDni": {
+                            "type": "string"
+                          },
+                          "beneficiaryGivenName": {
+                            "type": "string"
+                          },
+                          "beneficiaryFamilyName": {
+                            "type": "string"
+                          },
+                          "gender": {
+                            "type": "string"
+                          },
+                          "birthDate": {
                             "type": "string"
                           }
                         },
                         "required": [
-                          "email"
+                            "credentialName",
+                            "dni",
+                            "givenName",
+                            "familyName",
+                            "holderRelation",
+                            "beneficiaryDni",
+                            "beneficiaryGivenName",
+                            "beneficiaryFamilyName",
+                            "birthDate"
                         ]
                       }
                     },
@@ -76,7 +110,7 @@ module.exports = {
                   }
                 },
                 "required": [
-                  "Email"
+                  "Identidad Familiar"
                 ]
               }
             },
@@ -96,5 +130,4 @@ module.exports = {
           "vc",
           "iss"
         ]
-      }
-}
+  }
