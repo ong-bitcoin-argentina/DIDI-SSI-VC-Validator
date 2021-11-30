@@ -3,7 +3,7 @@ const { createSemicolonClassElement } = require('typescript');
 const jwt = require('jsonwebtoken');
 const { jwtDecode } = require('jwt-decode');
 const {validateCredential} = require('../src/validator');
-import { v1 } from "../src/schema/semilla/semillaSembFamiliar-schema-v1";
+import { semillaSembFamiliar } from "../src/schemas/benefit";
 
 const valid = { 
     iat: 123456,
@@ -34,7 +34,7 @@ const valid = {
 const validJWT = jwt.sign(valid, "semillaSembFamiliarKey");
 
 test('Validate ok', async () => {
-    const result = await validateCredential(v1.semillaSembFamiliarSchema, validJWT);
+    const result = await validateCredential(semillaSembFamiliar.v1, validJWT);
     expect(result.status).toBe(true);
     expect(result.errors).toBe(null);
 });
@@ -71,7 +71,7 @@ const invalidSub = {
 const InvalidSubJWT = jwt.sign(invalidSub, "semillaSembFamiliarKey");
 
 test('Validate sub field FAIL', async() => {
-    const result = await validateCredential(v1.semillaSembFamiliarSchema, InvalidSubJWT);
+    const result = await validateCredential(semillaSembFamiliar.v1, InvalidSubJWT);
     expect(result.status).toBe(false);
     expect(result.errors[0].keyword).toBe('type');
     expect(result.errors[0].dataPath).toBe('.sub');
@@ -114,7 +114,7 @@ const InvalidIssJWT = jwt.sign(invalidIss, "semillaSembFamiliarKey");
 
 
 test('Validate iss field FAIL', async () => {
-    const result = await validateCredential(v1.semillaSembFamiliarSchema, InvalidIssJWT);
+    const result = await validateCredential(semillaSembFamiliar.v1, InvalidIssJWT);
     expect(result.status).toBe(false);
     expect(result.errors[0].keyword).toBe('type');
     expect(result.errors[0].dataPath).toBe('.iss');
@@ -155,7 +155,7 @@ const invalidPreviewJWT = jwt.sign(invalidPreviewType, "semillaSembFamiliarKey")
 
 
 test(`Validate .vc.credentialSubject['Sembrado Familiar'].preview.type field FAIL`, async() =>{
-    const result = await validateCredential(v1.semillaSembFamiliarSchema, invalidPreviewJWT);
+    const result = await validateCredential(semillaSembFamiliar.v1, invalidPreviewJWT);
     expect(result.status).toBe(false);
     expect(result.errors[0].keyword).toBe('type');
     expect(result.errors[0].dataPath).toBe(`.vc.credentialSubject['Sembrado Familiar'].preview.type`);
@@ -195,7 +195,7 @@ test(`Validate .vc.credentialSubject['Sembrado Familiar'].preview.type field FAI
 const invalidDataTypeJWT = jwt.sign(invalidDataType, "semillaSembFamiliarKey");
 
 test(`Validate .vc.credentialSubject['Sembrado Familiar'].data.type field FAIL`, async() =>{
-    const result = await validateCredential(v1.semillaSembFamiliarSchema, invalidDataTypeJWT);
+    const result = await validateCredential(semillaSembFamiliar.v1, invalidDataTypeJWT);
     expect(result.status).toBe(false);
     expect(result.errors[0].keyword).toBe('type');
     expect(result.errors[0].dataPath).toBe(`.vc.credentialSubject['Sembrado Familiar'].data.credentialName`);
@@ -234,7 +234,7 @@ const invalidCategory = {
 const invalidCategoryJWT = jwt.sign(invalidCategory, "semillaSembFamiliarKey");
 
 test(`Validate .vc.credentialSubject['Sembrado Familiar'].category.type field FAIL`, async() =>{
-    const result = await validateCredential(v1.semillaSembFamiliarSchema, invalidCategoryJWT);
+    const result = await validateCredential(semillaSembFamiliar.v1, invalidCategoryJWT);
     expect(result.status).toBe(false);
     expect(result.errors[0].keyword).toBe('type');
     expect(result.errors[0].dataPath).toBe(`.vc.credentialSubject['Sembrado Familiar'].category`);
