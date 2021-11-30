@@ -1,5 +1,5 @@
-module.exports = {
-  addressSchema: {
+export const v1 = {
+  identitySchema: {
       "type": "object",
       "properties": {
         "iat": {
@@ -30,7 +30,7 @@ module.exports = {
             "credentialSubject": {
               "type": "object",
               "properties": {
-                "Domicilio Legal": {
+                "Datos Personales": {
                   "type": "object",
                   "properties": {
                     "preview": {
@@ -59,44 +59,24 @@ module.exports = {
                     "data": {
                       "type": "object",
                       "properties": {
-                        "streetAddress": {
+                        "dni": {
                           "type": "string"
                         },
-                        "numberStreet": {
+                        "names": {
                           "type": "string"
                         },
-                        "floor": {
+                        "lastNames": {
                           "type": "string"
                         },
-                        "department": {
-                          "type": "string"
-                        },
-                        "zipCode": {
-                          "type": "string"
-                        },
-                        "city": {
-                          "type": "string"
-                        },
-                        "municipality": {
-                          "type": "string"
-                        },
-                        "province": {
-                          "type": "string"
-                        },
-                        "country": {
+                        "nationality": {
                           "type": "string"
                         }
                       },
                       "required": [
-                        "streetAddress",
-                        "numberStreet",
-                        "floor",
-                        "department",
-                        "zipCode",
-                        "city",
-                        "municipality",
-                        "province",
-                        "country"
+                        "dni",
+                        "names",
+                        "lastNames",
+                        "nationality",
                       ]
                     }
                   },
@@ -108,7 +88,7 @@ module.exports = {
                 }
               },
               "required": [
-                "Domicilio Legal"
+                "Datos Personales"
               ]
             }
           },

@@ -1,5 +1,5 @@
-module.exports = {
-    emailSchema: {
+export const v1 = {
+  emailSchema: {
         "type": "object",
         "properties": {
           "iat": {

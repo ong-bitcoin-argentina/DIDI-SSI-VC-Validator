@@ -1,5 +1,4 @@
-module.exports = {
-
+export const v1 = {
   phoneSchema: {
     "type": "object",
     "properties": {

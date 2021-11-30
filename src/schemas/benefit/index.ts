@@ -1,0 +1,1 @@
+export * as semillaSembTitular from './semillaSembFamiliar-schema';
