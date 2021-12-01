@@ -167,7 +167,7 @@ export const v1 = {
           "credentialSubject": {
             "type": "object",
             "properties": {
-              "Vivienda": {
+              "Semillas Vivienda": {
                 "type": "object",
                 "properties": {
                   "preview": {
@@ -196,54 +196,54 @@ export const v1 = {
                   "data": {
                     "type": "object",
                     "properties": {
-                      "credentialName": {
+                      "CERTIFICADO O CURSO": {
                         "type": "string"
                       },
-                      "livingPlaceStatus": {
+                      "Tipo de Tenencia": {
                         "type": "string"
                       },
-                      "livingPlaceType": {
+                      "Tipo de Vivienda": {
                         "type": "string"
                       },
-                      "locationType": {
+                      "Tipo de Barrio": {
                         "type": "string"
                       },
-                      "district": {
+                      "Distrito de Residencia": {
                         "type": "string"
                       },
-                      "neighborhood": {
+                      "Barrio": {
                         "type": "string"
                       },
-                      "livingPlaceGeneralConditions": {
+                      "Condiciones grales": {
                         "type": "string"
                       },
-                      "livingPlaceGasNetwork": {
+                      "Red de gas": {
                         "type": "string"
                       },
-                      "livingPlaceCarefe": {
+                      "Garrafa": {
                         "type": "string"
                       },
-                      "livingPlaceWaterNetwork": {
+                      "Red de Agua": {
                         "type": "string"
                       },
-                      "livingPlaceWellPump": {
+                      "Pozo/Bomba": {
                         "type": "string"
                       },
-                      "livingPlaceElectricityGrid": {
+                      "Instalacion de luz": {
                         "type": "string"
                       },
-                      "givenName": {
+                      "NOMBRE": {
                         "type": "string"
                       },
-                      "familyName": {
+                      "APELLIDO": {
                         "type": "string"
                       }
                     },
                     "required": [
-                        "credentialName",
-                        "livingPlaceStatus",
-                        "givenName",
-                        "familyName"
+                        "CERTIFICADO O CURSO",
+                        "Tipo de Tenencia",
+                        "NOMBRE",
+                        "APELLIDO"
                     ]
                   }
                 },
@@ -255,7 +255,7 @@ export const v1 = {
               }
             },
             "required": [
-              "Vivienda"
+              "Semillas Vivienda"
             ]
           }
         },
