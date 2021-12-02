@@ -6,7 +6,7 @@ const { validateCredential } = require("../src/validator");
 import { shareRequestSchema } from "../src/schemas/shareRequest";
 
 const valid = {
-  iat: 1638460373,
+  iat: 33,
   callback: "callback",
   type: "shareReq",
   claims: {
@@ -18,8 +18,8 @@ const valid = {
             url: "https://uport.claims/email",
           },
           {
-            did: "did:web:sobol.io",
-            url: "https://sobol.io/verify",
+            did: "did:web:url.com",
+            url: "https://url.com",
           },
         ],
         reason: "Whe need to be able to email you",
@@ -36,8 +36,8 @@ const valid = {
       },
     },
   },
-  aud: "0x18a208fdf867348db23e3bde3d1e3ab4cf60f9e9",
-  iss: "did:ethr:rsk:0x486aba684988ffbb681832273b4ba55e65b96883",
+  aud: "0xaud",
+  iss: "did:ethr:firmante",
 };
 
 const validJWT = jwt.sign(valid, "sharedResquestKey");
@@ -51,7 +51,7 @@ test("Validate ok", async () => {
 
 //INVALID SUB
 const invalidIss = {
-  iat: 1638460373,
+  iat: 33,
   callback: "callback",
   type: "shareReq",
   claims: {
@@ -63,8 +63,8 @@ const invalidIss = {
             url: "https://uport.claims/email",
           },
           {
-            did: "did:web:sobol.io",
-            url: "https://sobol.io/verify",
+            did: "did:web:url.com",
+            url: "https://url.com",
           },
         ],
         reason: "Whe need to be able to email you",
@@ -81,7 +81,7 @@ const invalidIss = {
       },
     },
   },
-  aud: "0x18a208fdf867348db23e3bde3d1e3ab4cf60f9e9",
+  aud: "0xaud",
   iss: 5,
 };
 
@@ -99,7 +99,7 @@ test("Validate iss field FAIL", async () => {
 
 //INVALID AUD
 const invalidAud = {
-  iat: 1638460373,
+  iat: 33,
   callback: "callback",
   type: "shareReq",
   claims: {
@@ -111,8 +111,8 @@ const invalidAud = {
             url: "https://uport.claims/email",
           },
           {
-            did: "did:web:sobol.io",
-            url: "https://sobol.io/verify",
+            did: "did:web:url.com",
+            url: "https://url.com",
           },
         ],
         reason: "Whe need to be able to email you",
@@ -130,7 +130,7 @@ const invalidAud = {
     },
   },
   aud: 9,
-  iss: "did:ethr:rsk:0x486aba684988ffbb681832273b4ba55e65b96883",
+  iss: "did:ethr:firmante",
 };
 
 const invalidAudJWT = jwt.sign(invalidAud, "shareRequestKey");
@@ -147,7 +147,7 @@ test("Validate Aud field FAIL", async () => {
 
 //INVALID TYPE TYPE
 const invalidType = {
-  iat: 1638460373,
+  iat: 33,
   callback: "callback",
   type: 3,
   claims: {
@@ -159,8 +159,8 @@ const invalidType = {
             url: "https://uport.claims/email",
           },
           {
-            did: "did:web:sobol.io",
-            url: "https://sobol.io/verify",
+            did: "did:web:url.com",
+            url: "https://url.com",
           },
         ],
         reason: "Whe need to be able to email you",
@@ -177,8 +177,8 @@ const invalidType = {
       },
     },
   },
-  aud: "0x18a208fdf867348db23e3bde3d1e3ab4cf60f9e9",
-  iss: "did:ethr:rsk:0x486aba684988ffbb681832273b4ba55e65b96883",
+  aud: "0xaud",
+  iss: "did:ethr:firmante",
 };
 
 const invalidTypeJWT = jwt.sign(invalidType, "shareRequestKey");
@@ -198,7 +198,7 @@ test("Validate type field FAIL", async () => {
 
 //INVALID CALLBACK TYPE
 const invalidCallback = {
-  iat: 1638460373,
+  iat: 33,
   callback: 7,
   type: "shareReq",
   claims: {
@@ -210,8 +210,8 @@ const invalidCallback = {
             url: "https://uport.claims/email",
           },
           {
-            did: "did:web:sobol.io",
-            url: "https://sobol.io/verify",
+            did: "did:web:url.com",
+            url: "https://url.com",
           },
         ],
         reason: "Whe need to be able to email you",
@@ -228,8 +228,8 @@ const invalidCallback = {
       },
     },
   },
-  aud: "0x18a208fdf867348db23e3bde3d1e3ab4cf60f9e9",
-  iss: "did:ethr:rsk:0x486aba684988ffbb681832273b4ba55e65b96883",
+  aud: "0xaud",
+  iss: "did:ethr:firmante",
 };
 
 const invalidCallbackJWT = jwt.sign(invalidCallback, "shareRequestKey");
@@ -250,7 +250,7 @@ test("Validate Callback field FAIL", async () => {
 //INVALID DID TYPE
 
 const invalidDidType = {
-  iat: 1638460373,
+  iat: 33,
   callback: "callback",
   type: "shareReq",
   claims: {
@@ -262,8 +262,8 @@ const invalidDidType = {
             url: "https://uport.claims/email",
           },
           {
-            did: "did:web:sobol.io",
-            url: "https://sobol.io/verify",
+            did: "did:web:url.com",
+            url: "https://url.com",
           },
         ],
         reason: "Whe need to be able to email you",
@@ -280,8 +280,8 @@ const invalidDidType = {
       },
     },
   },
-  aud: "0x18a208fdf867348db23e3bde3d1e3ab4cf60f9e9",
-  iss: "did:ethr:rsk:0x486aba684988ffbb681832273b4ba55e65b96883",
+  aud: "0xaud",
+  iss: "did:ethr:firmante",
 };
 
 const invalidDidTypeJWT = jwt.sign(invalidDidType, "shareRequestKey");
@@ -305,7 +305,7 @@ test(`Validate .claims.verifiable.emailMain.iss.did.type field FAIL`, async () =
 
 //INVALID URL TYPE
 const invalidUrlType = {
-  iat: 1638460373,
+  iat: 33,
   callback: "callback",
   type: "shareReq",
   claims: {
@@ -317,8 +317,8 @@ const invalidUrlType = {
             url: 7,
           },
           {
-            did: "did:web:sobol.io",
-            url: "https://sobol.io/verify",
+            did: "did:web:url.com",
+            url: "https://url.com",
           },
         ],
         reason: "Whe need to be able to email you",
@@ -335,8 +335,8 @@ const invalidUrlType = {
       },
     },
   },
-  aud: "0x18a208fdf867348db23e3bde3d1e3ab4cf60f9e9",
-  iss: "did:ethr:rsk:0x486aba684988ffbb681832273b4ba55e65b96883",
+  aud: "0xaud",
+  iss: "did:ethr:firmante",
 };
 
 const invalidUrlTypeJWT = jwt.sign(invalidUrlType, "shareRequestKey");
@@ -360,7 +360,7 @@ test(`Validate .claims.verifiable.emailMain.iss.url.type field FAIL`, async () =
 
 //INVALID VERIFIABLE DATA TYPE
 const invalidVerifiableDataType = {
-  iat: 1638460373,
+  iat: 33,
   callback: "callback",
   type: "shareReq",
   claims: {
@@ -372,8 +372,8 @@ const invalidVerifiableDataType = {
             url: "https://uport.claims/email",
           },
           {
-            did: "did:web:sobol.io",
-            url: "https://sobol.io/verify",
+            did: "did:web:url.com",
+            url: "https://url.com",
           },
         ],
         reason: 7,
@@ -390,8 +390,8 @@ const invalidVerifiableDataType = {
       },
     },
   },
-  aud: "0x18a208fdf867348db23e3bde3d1e3ab4cf60f9e9",
-  iss: "did:ethr:rsk:0x486aba684988ffbb681832273b4ba55e65b96883",
+  aud: "0xaud",
+  iss: "did:ethr:firmante",
 };
 
 const invalidVerifiableDataTypeJWT = jwt.sign(
