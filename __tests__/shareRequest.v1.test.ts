@@ -48,7 +48,6 @@ test("Validate ok", async () => {
   expect(result.status).toBe(true);
   expect(result.errors).toBe(null);
 });
-
 //INVALID SUB
 const invalidIss = {
   iat: 33,
