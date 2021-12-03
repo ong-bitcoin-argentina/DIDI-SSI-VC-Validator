@@ -1,7 +1,7 @@
 import { getTypes } from "../../credentialList";
 
-const listCredentials = getTypes().reduce((_acc: any, valor: string) => {
-  _acc[`${valor}`] = {
+const verifiableProperties = getTypes().reduce((_acc: any, valor: string) => {
+  _acc[valor] = {
     type: "object",
     properties: {
       essential: {
@@ -9,22 +9,26 @@ const listCredentials = getTypes().reduce((_acc: any, valor: string) => {
       },
       iss: {
         type: "array",
-        items: {
-          type: "object",
-          properties: {
-            did: {
-              type: "string",
+        items: [
+          {
+            type: "object",
+            properties: {
+              did: {
+                type: "string",
+              },
+              url: {
+                type: "string",
+              },
             },
-            url: {
-              type: "string",
-            },
+            required: ["url", "did"],
           },
-        },
+        ],
       },
       reason: {
         type: "string",
       },
     },
+    required: ["iss", "reason"],
   };
   return _acc;
 }, {});
@@ -46,7 +50,7 @@ export const v1 = {
       properties: {
         verifiable: {
           type: "object",
-          properties: listCredentials,
+          properties: verifiableProperties,
           required: [],
         },
       },

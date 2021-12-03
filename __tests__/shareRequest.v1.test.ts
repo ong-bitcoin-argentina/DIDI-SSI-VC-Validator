@@ -11,20 +11,7 @@ const valid = {
   type: "shareReq",
   claims: {
     verifiable: {
-      emailMain: {
-        iss: [
-          {
-            did: "did:web:uport.claims",
-            url: "https://uport.claims/email",
-          },
-          {
-            did: "did:web:url.com",
-            url: "https://url.com",
-          },
-        ],
-        reason: "Whe need to be able to email you",
-      },
-      nationalId: {
+      semillaSembFamiliar: {
         essential: true,
         iss: [
           {
@@ -32,7 +19,29 @@ const valid = {
             url: "https://idverifier.example",
           },
         ],
-        reason: "To legally be able to open your account",
+        reason: "To legally be able to ...",
+      },
+
+      semillaSancorSalud: {
+        essential: true,
+        iss: [
+          {
+            did: "did:web:idverifier.claims",
+            url: "https://idverifier.example",
+          },
+        ],
+        reason: "To legally be able to ...",
+      },
+
+      mobilePhone: {
+        essential: true,
+        iss: [
+          {
+            did: "did:web:idverifier.claims",
+            url: "https://idverifier.example",
+          },
+        ],
+        reason: "To legally be able to send you a text",
       },
     },
   },
@@ -44,7 +53,6 @@ const validJWT = jwt.sign(valid, "sharedResquestKey");
 
 test("Validate ok", async () => {
   const result = await validateCredential(shareRequestSchema.v1, validJWT);
-  console.log(result);
   expect(result.status).toBe(true);
   expect(result.errors).toBe(null);
 });
@@ -296,7 +304,7 @@ test(`Validate .claims.verifiable.emailMain.iss.did.type field FAIL`, async () =
     ".claims.verifiable.emailMain.iss[0].did"
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/claims/properties/verifiable/properties/emailMain/properties/iss/items/properties/did/type"
+    "#/properties/claims/properties/verifiable/properties/emailMain/properties/iss/items/0/properties/did/type"
   );
   expect(result.errors[0].params.type).toBe("string");
   expect(result.errors[0].message).toBe("should be string");
@@ -317,7 +325,6 @@ const invalidUrlType = {
           },
           {
             did: "did:web:url.com",
-            url: "https://url.com",
           },
         ],
         reason: "Whe need to be able to email you",
@@ -351,7 +358,7 @@ test(`Validate .claims.verifiable.emailMain.iss.url.type field FAIL`, async () =
     ".claims.verifiable.emailMain.iss[0].url"
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/claims/properties/verifiable/properties/emailMain/properties/iss/items/properties/url/type"
+    "#/properties/claims/properties/verifiable/properties/emailMain/properties/iss/items/0/properties/url/type"
   );
   expect(result.errors[0].params.type).toBe("string");
   expect(result.errors[0].message).toBe("should be string");
@@ -375,7 +382,7 @@ const invalidVerifiableDataType = {
             url: "https://url.com",
           },
         ],
-        reason: 7,
+        reason: 88,
       },
       nationalId: {
         essential: true,
@@ -403,6 +410,7 @@ test(`Validate .claims.verifiable.emailMain.reason.type field FAIL`, async () =>
     shareRequestSchema.v1,
     invalidVerifiableDataTypeJWT
   );
+
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe("type");
   expect(result.errors[0].dataPath).toBe(".claims.verifiable.emailMain.reason");
