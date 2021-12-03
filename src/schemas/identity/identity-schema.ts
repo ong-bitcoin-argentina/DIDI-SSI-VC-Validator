@@ -1,110 +1,87 @@
 export const v1 = {
-      "type": "object",
-      "properties": {
-        "iat": {
-          "type": "integer"
-        },
-        "sub": {
-          "type": "string"
-        },
-        "vc": {
-          "type": "object",
-          "properties": {
-            "@context": {
-              "type": "array",
-              "items": [
-                {
-                  "type": "string"
-                }
-              ]
+  type: "object",
+  properties: {
+    iat: {
+      type: "integer",
+    },
+    sub: {
+      type: "string",
+    },
+    vc: {
+      type: "object",
+      properties: {
+        "@context": {
+          type: "array",
+          items: [
+            {
+              type: "string",
             },
-            "type": {
-              "type": "array",
-              "items": [
-                {
-                  "type": "string"
-                }
-              ]
+          ],
+        },
+        type: {
+          type: "array",
+          items: [
+            {
+              type: "string",
             },
-            "credentialSubject": {
-              "type": "object",
-              "properties": {
-                "Datos Personales": {
-                  "type": "object",
-                  "properties": {
-                    "preview": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "integer"
-                        },
-                        "fields": {
-                          "type": "array",
-                          "items": [
-                            {
-                              "type": "string"
-                            }
-                          ]
-                        }
-                      },
-                      "required": [
-                        "type",
-                        "fields"
-                      ]
+          ],
+        },
+        credentialSubject: {
+          type: "object",
+          properties: {
+            "Datos Personales": {
+              type: "object",
+              properties: {
+                preview: {
+                  type: "object",
+                  properties: {
+                    type: {
+                      type: "integer",
                     },
-                    "category": {
-                      "type": "string"
+                    fields: {
+                      type: "array",
+                      items: [
+                        {
+                          type: "string",
+                        },
+                      ],
                     },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "dni": {
-                          "type": "string"
-                        },
-                        "names": {
-                          "type": "string"
-                        },
-                        "lastNames": {
-                          "type": "string"
-                        },
-                        "nationality": {
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "dni",
-                        "names",
-                        "lastNames",
-                        "nationality",
-                      ]
-                    }
                   },
-                  "required": [
-                    "preview",
-                    "category",
-                    "data"
-                  ]
-                }
+                  required: ["type", "fields"],
+                },
+                category: {
+                  type: "string",
+                },
+                data: {
+                  type: "object",
+                  properties: {
+                    dni: {
+                      type: "string",
+                    },
+                    names: {
+                      type: "string",
+                    },
+                    lastNames: {
+                      type: "string",
+                    },
+                    nationality: {
+                      type: "string",
+                    },
+                  },
+                  required: ["dni", "names", "lastNames", "nationality"],
+                },
               },
-              "required": [
-                "Datos Personales"
-              ]
-            }
+              required: ["preview", "category", "data"],
+            },
           },
-          "required": [
-            "@context",
-            "type",
-            "credentialSubject"
-          ]
+          required: ["Datos Personales"],
         },
-        "iss": {
-          "type": "string"
-        }
       },
-      "required": [
-        "iat",
-        "sub",
-        "vc",
-        "iss"
-      ]
-}
+      required: ["@context", "type", "credentialSubject"],
+    },
+    iss: {
+      type: "string",
+    },
+  },
+  required: ["iat", "sub", "vc", "iss"],
+};
