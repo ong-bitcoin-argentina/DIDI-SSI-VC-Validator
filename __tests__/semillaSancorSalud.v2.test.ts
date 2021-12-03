@@ -7,7 +7,7 @@ import { semillaSancorSalud } from "../src/schemas/benefit";
 
 const valid = {
   iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v2"],
     type: ["VerifiableCredential"],
@@ -47,17 +47,17 @@ const valid = {
         },
         data: {
           credentialName: "Sancor Salud",
-          policyId: "429273",
-          certId: "492",
-          refId: "429273",
-          dni: "95032153",
-          givenName: "Leslie Carol",
-          familyName: "Alcalde Rojas",
+          policyId: "Id",
+          certId: "cert Id",
+          refId: "Id",
+          dni: "numero de DNI",
+          givenName: "nombre",
+          familyName: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const validJWT = jwt.sign(valid, "semillaSancorSaludKey");
@@ -110,17 +110,17 @@ const invalidSub = {
         },
         data: {
           credentialName: "Sancor Salud",
-          policyId: "429273",
-          certId: "492",
-          refId: "429273",
-          dni: "95032153",
-          givenName: "Leslie Carol",
-          familyName: "Alcalde Rojas",
+          policyId: "Id",
+          certId: "cert Id",
+          refId: "Id",
+          dni: "numero de DNI",
+          givenName: "nombre",
+          familyName: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const invalidSubJWT = jwt.sign(invalidSub, "semillaSancorSaludKey");
@@ -138,7 +138,7 @@ test("Validate sub field FAIL", async () => {
 //INVALID ISS
 const invalidIss = {
   iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v2"],
     type: ["VerifiableCredential"],
@@ -177,12 +177,12 @@ const invalidIss = {
         },
         data: {
           credentialName: "Sancor Salud",
-          policyId: "429273",
-          certId: "492",
-          refId: "429273",
-          dni: "95032153",
-          givenName: "Leslie Carol",
-          familyName: "Alcalde Rojas",
+          policyId: "Id",
+          certId: "cert Id",
+          refId: "Id",
+          dni: "numero de DNI",
+          givenName: "nombre",
+          familyName: "apellido",
         },
       },
     },
@@ -205,7 +205,7 @@ test("Validate iss field FAIL", async () => {
 //INVALID PREVIEW TYPE
 const invalidPreview = {
   iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v2"],
     type: ["VerifiableCredential"],
@@ -244,17 +244,17 @@ const invalidPreview = {
         },
         data: {
           credentialName: "Sancor Salud",
-          policyId: "429273",
-          certId: "492",
-          refId: "429273",
-          dni: "95032153",
-          givenName: "Leslie Carol",
-          familyName: "Alcalde Rojas",
+          policyId: "Id",
+          certId: "cert Id",
+          refId: "Id",
+          dni: "numero de DNI",
+          givenName: "nombre",
+          familyName: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const invalidPreviewJWT = jwt.sign(invalidPreview, "semillaSancorSaludKey");
@@ -279,7 +279,7 @@ test(`Validate .vc.credentialSubject['Sancor Salud'].preview.type field FAIL`, a
 //INVALID DATA TYPE
 const invalidDataType = {
   iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v2"],
     type: ["VerifiableCredential"],
@@ -318,17 +318,17 @@ const invalidDataType = {
         },
         data: {
           credentialName: 5,
-          policyId: "429273",
-          certId: "492",
-          refId: "429273",
-          dni: "95032153",
-          givenName: "Leslie Carol",
-          familyName: "Alcalde Rojas",
+          policyId: "Id",
+          certId: "cert Id",
+          refId: "Id",
+          dni: "numero de DNI",
+          givenName: "nombre",
+          familyName: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const invalidDataTypeJWT = jwt.sign(invalidDataType, "semillaSancorSaludKey");
@@ -353,7 +353,7 @@ test(`Validate .vc.credentialSubject['Sancor Salud'].data.type field FAIL`, asyn
 //INVALID CATEGORY
 const invalidCategory = {
   iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v2"],
     type: ["VerifiableCredential"],
@@ -392,17 +392,17 @@ const invalidCategory = {
         },
         data: {
           credentialName: "Sancor Salud",
-          policyId: "429273",
-          certId: "492",
-          refId: "429273",
-          dni: "95032153",
-          givenName: "Leslie Carol",
-          familyName: "Alcalde Rojas",
+          policyId: "Id",
+          certId: "cert Id",
+          refId: "Id",
+          dni: "numero de DNI",
+          givenName: "nombre",
+          familyName: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const invalidCategoryJWT = jwt.sign(invalidCategory, "semillaSancorSaludKey");

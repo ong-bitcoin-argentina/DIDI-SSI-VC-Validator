@@ -6,8 +6,8 @@ const { validateCredential } = require("../src/validator");
 import { semillaSancorSalud } from "../src/schemas/benefit";
 
 const valid = {
-  iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  iat: 16,
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v1"],
     type: ["VerifiableCredential"],
@@ -39,17 +39,17 @@ const valid = {
         },
         data: {
           "CERTIFICADO O CURSO": "Sancor Salud",
-          POLIZA: "429273",
-          CERT: "492",
-          REF: "429273",
-          DNI: "95032153",
-          NOMBRE: "Leslie Carol",
-          APELLIDO: "Alcalde Rojas",
+          POLIZA: "numero",
+          CERT: "certificado",
+          REF: "numero",
+          DNI: "numero de DNI",
+          NOMBRE: "nombre",
+          APELLIDO: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const validJWT = jwt.sign(valid, "semillaSancorSaludKey");
@@ -63,7 +63,7 @@ test("Validate ok", async () => {
 
 //INVALID SUB
 const invalidSub = {
-  iat: 1615852880,
+  iat: 16,
   sub: 2,
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v1"],
@@ -96,17 +96,17 @@ const invalidSub = {
         },
         data: {
           "CERTIFICADO O CURSO": "Sancor Salud",
-          POLIZA: "429273",
-          CERT: "492",
-          REF: "429273",
-          DNI: "95032153",
-          NOMBRE: "Leslie Carol",
-          APELLIDO: "Alcalde Rojas",
+          POLIZA: "numero",
+          CERT: "certificado",
+          REF: "numero",
+          DNI: "numero de DNI",
+          NOMBRE: "nombre",
+          APELLIDO: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const invalidSubJWT = jwt.sign(invalidSub, "semillaSancorSaludKey");
@@ -123,8 +123,8 @@ test("Validate sub field FAIL", async () => {
 
 //INVALID ISS
 const invalidIss = {
-  iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  iat: 16,
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v1"],
     type: ["VerifiableCredential"],
@@ -156,12 +156,12 @@ const invalidIss = {
         },
         data: {
           "CERTIFICADO O CURSO": "Sancor Salud",
-          POLIZA: "429273",
-          CERT: "492",
-          REF: "429273",
-          DNI: "95032153",
-          NOMBRE: "Leslie Carol",
-          APELLIDO: "Alcalde Rojas",
+          POLIZA: "numero",
+          CERT: "certificado",
+          REF: "numero",
+          DNI: "numero de DNI",
+          NOMBRE: "nombre",
+          APELLIDO: "apellido",
         },
       },
     },
@@ -183,8 +183,8 @@ test("Validate iss field FAIL", async () => {
 
 //INVALID PREVIEW TYPE
 const invalidPreview = {
-  iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  iat: 16,
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v1"],
     type: ["VerifiableCredential"],
@@ -216,17 +216,17 @@ const invalidPreview = {
         },
         data: {
           "CERTIFICADO O CURSO": "Sancor Salud",
-          POLIZA: "429273",
-          CERT: "492",
-          REF: "429273",
-          DNI: "95032153",
-          NOMBRE: "Leslie Carol",
-          APELLIDO: "Alcalde Rojas",
+          POLIZA: "numero",
+          CERT: "certificado",
+          REF: "numero",
+          DNI: "numero de DNI",
+          NOMBRE: "nombre",
+          APELLIDO: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const invalidPreviewJWT = jwt.sign(invalidPreview, "semillaSancorSaludKey");
@@ -250,8 +250,8 @@ test(`Validate .vc.credentialSubject['Sancor Salud'].preview.type field FAIL`, a
 
 //INVALID DATA TYPE
 const invalidDataType = {
-  iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  iat: 16,
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v1"],
     type: ["VerifiableCredential"],
@@ -283,17 +283,17 @@ const invalidDataType = {
         },
         data: {
           "CERTIFICADO O CURSO": 5,
-          POLIZA: "429273",
-          CERT: "492",
-          REF: "429273",
-          DNI: "95032153",
-          NOMBRE: "Leslie Carol",
-          APELLIDO: "Alcalde Rojas",
+          POLIZA: "numero",
+          CERT: "certificado",
+          REF: "numero",
+          DNI: "numero de DNI",
+          NOMBRE: "nombre",
+          APELLIDO: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const invalidDataTypeJWT = jwt.sign(invalidDataType, "semillaSancorSaludKey");
@@ -317,8 +317,8 @@ test(`Validate .vc.credentialSubject['Sancor Salud'].data.type field FAIL`, asyn
 
 //INVALID CATEGORY
 const invalidCategory = {
-  iat: 1615852880,
-  sub: "did:ethr:0xb32a221acb553e48d8999a98de9af5f2786e13e4",
+  iat: 16,
+  sub: "did:ethr:16",
   vc: {
     "@context": ["https://www.w3.org/2018/credentials/v1"],
     type: ["VerifiableCredential"],
@@ -350,17 +350,17 @@ const invalidCategory = {
         },
         data: {
           "CERTIFICADO O CURSO": "Sancor Salud",
-          POLIZA: "429273",
-          CERT: "492",
-          REF: "429273",
-          DNI: "95032153",
-          NOMBRE: "Leslie Carol",
-          APELLIDO: "Alcalde Rojas",
+          POLIZA: "numero",
+          CERT: "certificado",
+          REF: "numero",
+          DNI: "numero de DNI",
+          NOMBRE: "nombre",
+          APELLIDO: "apellido",
         },
       },
     },
   },
-  iss: "did:ethr:0xf31848d20f206f6d7f330a9c2e1c17c436815af3",
+  iss: "did:ethr:0x16",
 };
 
 const invalidCategoryJWT = jwt.sign(invalidCategory, "semillaSancorSaludKey");
