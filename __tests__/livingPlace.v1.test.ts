@@ -3,6 +3,7 @@ const { createSemicolonClassElement } = require('typescript');
 const jwt = require('jsonwebtoken');
 const { jwtDecode } = require('jwt-decode');
 const { validateCredential } = require('../src/validator');
+
 import { livingPlace } from '../src/schemas/livingPlace';
 
 const valid = {
@@ -56,7 +57,7 @@ test('Validate ok', async () => {
   expect(result.errors).toBe(null);
 });
 
-//INVALID SUB
+// INVALID SUB
 
 const invalidSub = {
   iat: 1626782449,
@@ -113,7 +114,7 @@ test('Validate sub field FAIL', async () => {
   expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID ISS
+// INVALID ISS
 
 const invalidIss = {
   iat: 1626782449,
@@ -170,7 +171,7 @@ test('Validate iss field FAIL', async () => {
   expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID PREVIEW TYPE
+// INVALID PREVIEW TYPE
 
 const invalidPreviewType = {
   iat: 1626782449,
@@ -294,7 +295,7 @@ test(`Validate .vc.credentialSubject['Semillas Vivienda'].data.type field FAIL`,
   expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID CATEGORY
+// INVALID CATEGORY
 
 const invalidCategory = {
   iat: 1626782449,
