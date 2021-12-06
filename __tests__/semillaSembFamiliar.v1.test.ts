@@ -1,127 +1,128 @@
-const { createSemicolonClassElement } = require("typescript");
+const { createSemicolonClassElement } = require('typescript');
 
-const jwt = require("jsonwebtoken");
-const { jwtDecode } = require("jwt-decode");
-const { validateCredential } = require("../src/validator");
-import { semillaSembFamiliar } from "../src/schemas/benefit";
+const jwt = require('jsonwebtoken');
+const { jwtDecode } = require('jwt-decode');
+const { validateCredential } = require('../src/validator');
+
+import { semillaSembFamiliar } from '../src/schemas/benefit';
 
 const valid = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Sembrando - Familiar": {
+      'Sembrando - Familiar': {
         data: {
-          credentialName: "Test credential Name",
-          beneficiaryDNI: "Test beneficiary DNI",
-          benefitHolderType: "Test benefit Holder Type",
-          givenName: "Test given name",
-          familyName: "Test family name",
+          credentialName: 'Test credential Name',
+          beneficiaryDNI: 'Test beneficiary DNI',
+          benefitHolderType: 'Test benefit Holder Type',
+          givenName: 'Test given name',
+          familyName: 'Test family name',
         },
-        category: "benefit",
+        category: 'benefit',
         preview: {
           type: 1,
           fields: [
-            "credentialNumber",
-            "beneficiaryDNI",
-            "benefitHolderType",
-            "givenName",
-            "familyName",
+            'credentialNumber',
+            'beneficiaryDNI',
+            'benefitHolderType',
+            'givenName',
+            'familyName',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
-const validJWT = jwt.sign(valid, "semillaSembFamiliarKey");
+const validJWT = jwt.sign(valid, 'semillaSembFamiliarKey');
 
-test("Validate ok", async () => {
+test('Validate ok', async () => {
   const result = await validateCredential(semillaSembFamiliar.v1, validJWT);
   expect(result.status).toBe(true);
   expect(result.errors).toBe(null);
 });
 
-//INVALID SUB
+// INVALID SUB
 
 const invalidSub = {
   iat: 123456,
   sub: 1232123,
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
 
     credentialSubject: {
-      "Sembrando - Familiar": {
+      'Sembrando - Familiar': {
         data: {
-          credentialName: "Test credential Name",
-          beneficiaryDNI: "Test beneficiary DNI",
-          benefitHolderType: "Test benefit Holder Type",
-          givenName: "Test given name",
-          familyName: "Test family name",
+          credentialName: 'Test credential Name',
+          beneficiaryDNI: 'Test beneficiary DNI',
+          benefitHolderType: 'Test benefit Holder Type',
+          givenName: 'Test given name',
+          familyName: 'Test family name',
         },
-        category: "benefit",
+        category: 'benefit',
         preview: {
           type: 1,
           fields: [
-            "credentialNumber",
-            "beneficiaryDNI",
-            "benefitHolderType",
-            "givenName",
-            "familyName",
+            'credentialNumber',
+            'beneficiaryDNI',
+            'benefitHolderType',
+            'givenName',
+            'familyName',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
-const InvalidSubJWT = jwt.sign(invalidSub, "semillaSembFamiliarKey");
+const InvalidSubJWT = jwt.sign(invalidSub, 'semillaSembFamiliarKey');
 
-test("Validate sub field FAIL", async () => {
+test('Validate sub field FAIL', async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
-    InvalidSubJWT
+    InvalidSubJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
-  expect(result.errors[0].dataPath).toBe(".sub");
-  expect(result.errors[0].schemaPath).toBe("#/properties/sub/type");
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].keyword).toBe('type');
+  expect(result.errors[0].dataPath).toBe('.sub');
+  expect(result.errors[0].schemaPath).toBe('#/properties/sub/type');
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID ISS
+// INVALID ISS
 
 const invalidIss = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
 
     credentialSubject: {
-      "Sembrando - Familiar": {
+      'Sembrando - Familiar': {
         data: {
-          credentialName: "Test credential Name",
-          beneficiaryDNI: "Test beneficiary DNI",
-          benefitHolderType: "Test benefit Holder Type",
-          givenName: "Test given name",
-          familyName: "Test family name",
+          credentialName: 'Test credential Name',
+          beneficiaryDNI: 'Test beneficiary DNI',
+          benefitHolderType: 'Test benefit Holder Type',
+          givenName: 'Test given name',
+          familyName: 'Test family name',
         },
-        category: "benefit",
+        category: 'benefit',
         preview: {
           type: 1,
           fields: [
-            "credentialNumber",
-            "beneficiaryDNI",
-            "benefitHolderType",
-            "givenName",
-            "familyName",
+            'credentialNumber',
+            'beneficiaryDNI',
+            'benefitHolderType',
+            'givenName',
+            'familyName',
           ],
         },
       },
@@ -130,177 +131,177 @@ const invalidIss = {
   iss: 7878,
 };
 
-const InvalidIssJWT = jwt.sign(invalidIss, "semillaSembFamiliarKey");
+const InvalidIssJWT = jwt.sign(invalidIss, 'semillaSembFamiliarKey');
 
-test("Validate iss field FAIL", async () => {
+test('Validate iss field FAIL', async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
-    InvalidIssJWT
+    InvalidIssJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
-  expect(result.errors[0].dataPath).toBe(".iss");
-  expect(result.errors[0].schemaPath).toBe("#/properties/iss/type");
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].keyword).toBe('type');
+  expect(result.errors[0].dataPath).toBe('.iss');
+  expect(result.errors[0].schemaPath).toBe('#/properties/iss/type');
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID PREVIEW TYPE
+// INVALID PREVIEW TYPE
 const invalidPreviewType = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Sembrando - Familiar": {
+      'Sembrando - Familiar': {
         data: {
-          credentialName: "Test credential Name",
-          beneficiaryDNI: "Test beneficiary DNI",
-          benefitHolderType: "Test benefit Holder Type",
-          givenName: "Test given name",
-          familyName: "Test family name",
+          credentialName: 'Test credential Name',
+          beneficiaryDNI: 'Test beneficiary DNI',
+          benefitHolderType: 'Test benefit Holder Type',
+          givenName: 'Test given name',
+          familyName: 'Test family name',
         },
-        category: "benefit",
+        category: 'benefit',
         preview: {
-          type: "1",
+          type: '1',
           fields: [
-            "credentialNumber",
-            "beneficiaryDNI",
-            "benefitHolderType",
-            "givenName",
-            "familyName",
+            'credentialNumber',
+            'beneficiaryDNI',
+            'benefitHolderType',
+            'givenName',
+            'familyName',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
 const invalidPreviewJWT = jwt.sign(
   invalidPreviewType,
-  "semillaSembFamiliarKey"
+  'semillaSembFamiliarKey',
 );
 
 test(`Validate .vc.credentialSubject['Sembrando - Familiar'].preview.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
-    invalidPreviewJWT
+    invalidPreviewJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
+  expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Sembrando - Familiar'].preview.type`
+    `.vc.credentialSubject['Sembrando - Familiar'].preview.type`,
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/vc/properties/credentialSubject/properties/Sembrando%20-%20Familiar/properties/preview/properties/type/type"
+    '#/properties/vc/properties/credentialSubject/properties/Sembrando%20-%20Familiar/properties/preview/properties/type/type',
   );
-  expect(result.errors[0].params.type).toBe("integer");
-  expect(result.errors[0].message).toBe("should be integer");
+  expect(result.errors[0].params.type).toBe('integer');
+  expect(result.errors[0].message).toBe('should be integer');
 });
 
-//INVALID DATA TYPE
+// INVALID DATA TYPE
 
 const invalidDataType = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Sembrando - Familiar": {
+      'Sembrando - Familiar': {
         data: {
           credentialName: 123456,
-          beneficiaryDNI: "Test beneficiary DNI",
-          benefitHolderType: "Test benefit Holder Type",
-          givenName: "Test given name",
-          familyName: "Test family name",
+          beneficiaryDNI: 'Test beneficiary DNI',
+          benefitHolderType: 'Test benefit Holder Type',
+          givenName: 'Test given name',
+          familyName: 'Test family name',
         },
-        category: "benefit",
+        category: 'benefit',
         preview: {
           type: 1,
           fields: [
-            "credentialNumber",
-            "beneficiaryDNI",
-            "benefitHolderType",
-            "givenName",
-            "familyName",
+            'credentialNumber',
+            'beneficiaryDNI',
+            'benefitHolderType',
+            'givenName',
+            'familyName',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
-const invalidDataTypeJWT = jwt.sign(invalidDataType, "semillaSembFamiliarKey");
+const invalidDataTypeJWT = jwt.sign(invalidDataType, 'semillaSembFamiliarKey');
 
 test(`Validate .vc.credentialSubject['Sembrando - Familiar'].data.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
-    invalidDataTypeJWT
+    invalidDataTypeJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
+  expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Sembrando - Familiar'].data.credentialName`
+    `.vc.credentialSubject['Sembrando - Familiar'].data.credentialName`,
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/vc/properties/credentialSubject/properties/Sembrando%20-%20Familiar/properties/data/properties/credentialName/type"
+    '#/properties/vc/properties/credentialSubject/properties/Sembrando%20-%20Familiar/properties/data/properties/credentialName/type',
   );
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID CATEGORY TYPE
+// INVALID CATEGORY TYPE
 const invalidCategory = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Sembrando - Familiar": {
+      'Sembrando - Familiar': {
         data: {
-          credentialName: "Test credential Name",
-          beneficiaryDNI: "Test beneficiary DNI",
-          benefitHolderType: "Test benefit Holder Type",
-          givenName: "Test given name",
-          familyName: "Test family name",
+          credentialName: 'Test credential Name',
+          beneficiaryDNI: 'Test beneficiary DNI',
+          benefitHolderType: 'Test benefit Holder Type',
+          givenName: 'Test given name',
+          familyName: 'Test family name',
         },
         category: 1,
         preview: {
           type: 1,
           fields: [
-            "credentialNumber",
-            "beneficiaryDNI",
-            "benefitHolderType",
-            "givenName",
-            "familyName",
+            'credentialNumber',
+            'beneficiaryDNI',
+            'benefitHolderType',
+            'givenName',
+            'familyName',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
-const invalidCategoryJWT = jwt.sign(invalidCategory, "semillaSembFamiliarKey");
+const invalidCategoryJWT = jwt.sign(invalidCategory, 'semillaSembFamiliarKey');
 
 test(`Validate .vc.credentialSubject['Sembrando - Familiar'].category.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
-    invalidCategoryJWT
+    invalidCategoryJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
+  expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Sembrando - Familiar'].category`
+    `.vc.credentialSubject['Sembrando - Familiar'].category`,
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/vc/properties/credentialSubject/properties/Sembrando%20-%20Familiar/properties/category/type"
+    '#/properties/vc/properties/credentialSubject/properties/Sembrando%20-%20Familiar/properties/category/type',
   );
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });

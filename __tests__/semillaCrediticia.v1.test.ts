@@ -1,151 +1,152 @@
-const { createSemicolonClassElement } = require("typescript");
+const { createSemicolonClassElement } = require('typescript');
 
-const jwt = require("jsonwebtoken");
-const { jwtDecode } = require("jwt-decode");
-const { validateCredential } = require("../src/validator");
-import { semillaCrediticia } from "../src/schemas/finance";
+const jwt = require('jsonwebtoken');
+const { jwtDecode } = require('jwt-decode');
+const { validateCredential } = require('../src/validator');
+
+import { semillaCrediticia } from '../src/schemas/finance';
 
 const valid = {
   iat: 123456,
-  sub: "did:ethr:0x16",
+  sub: 'did:ethr:0x16',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Semillas Crediticia": {
-        category: "finance",
+      'Semillas Crediticia': {
+        category: 'finance',
         preview: {
           type: 2,
           fields: [
-            "Tipo de Credito",
-            "Estado de Credito",
-            "Saldo Vencido",
-            "Cuotas Totales",
+            'Tipo de Credito',
+            'Estado de Credito',
+            'Saldo Vencido',
+            'Cuotas Totales',
           ],
           cardLayout: null,
         },
         data: {
-          "CERTIFICADO O CURSO": "Semillas Crediticia",
-          "Dni Titular": "dni",
-          "Id Credito": "id del credito",
-          "Tipo de Credito": "Tipo de credito ",
-          "Id Grupo": "Id grupo",
-          "Ciclo del Credito": "Tipo de credito Ciclo 2",
-          "Estado de Credito": "Al dia",
-          "Monto total del Credito [$]": "55000.00",
-          "Saldo Vencido": "0.00",
-          "Cuota Actual": "0",
-          "Cuotas Totales": "4",
-          "Fecha de vencimiento de Cuota": "fecha",
-          "Fecha de inicio": "fecha",
-          NOMBRE: "nombre",
-          APELLIDO: "apellido",
+          'CERTIFICADO O CURSO': 'Semillas Crediticia',
+          'Dni Titular': 'dni',
+          'Id Credito': 'id del credito',
+          'Tipo de Credito': 'Tipo de credito ',
+          'Id Grupo': 'Id grupo',
+          'Ciclo del Credito': 'Tipo de credito Ciclo 2',
+          'Estado de Credito': 'Al dia',
+          'Monto total del Credito [$]': '55000.00',
+          'Saldo Vencido': '0.00',
+          'Cuota Actual': '0',
+          'Cuotas Totales': '4',
+          'Fecha de vencimiento de Cuota': 'fecha',
+          'Fecha de inicio': 'fecha',
+          NOMBRE: 'nombre',
+          APELLIDO: 'apellido',
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
-const validJWT = jwt.sign(valid, "semillaCrediticiaKey");
+const validJWT = jwt.sign(valid, 'semillaCrediticiaKey');
 
-test("Validate ok", async () => {
+test('Validate ok', async () => {
   const result = await validateCredential(semillaCrediticia.v1, validJWT);
   expect(result.status).toBe(true);
   expect(result.errors).toBe(null);
 });
 
-//INVALID SUB
+// INVALID SUB
 const invalidSub = {
   iat: 123456,
   sub: 26,
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Semillas Crediticia": {
-        category: "finance",
+      'Semillas Crediticia': {
+        category: 'finance',
         preview: {
           type: 2,
           fields: [
-            "Tipo de Credito",
-            "Estado de Credito",
-            "Saldo Vencido",
-            "Cuotas Totales",
+            'Tipo de Credito',
+            'Estado de Credito',
+            'Saldo Vencido',
+            'Cuotas Totales',
           ],
           cardLayout: null,
         },
         data: {
-          "CERTIFICADO O CURSO": "Semillas Crediticia",
-          "Dni Titular": "dni",
-          "Id Credito": "id del credito",
-          "Tipo de Credito": "Tipo de credito ",
-          "Id Grupo": "Id grupo",
-          "Ciclo del Credito": "Tipo de credito Ciclo 2",
-          "Estado de Credito": "Al dia",
-          "Monto total del Credito [$]": "55000.00",
-          "Saldo Vencido": "0.00",
-          "Cuota Actual": "0",
-          "Cuotas Totales": "4",
-          "Fecha de vencimiento de Cuota": "fecha",
-          "Fecha de inicio": "fecha",
-          NOMBRE: "nombre",
-          APELLIDO: "apellido",
+          'CERTIFICADO O CURSO': 'Semillas Crediticia',
+          'Dni Titular': 'dni',
+          'Id Credito': 'id del credito',
+          'Tipo de Credito': 'Tipo de credito ',
+          'Id Grupo': 'Id grupo',
+          'Ciclo del Credito': 'Tipo de credito Ciclo 2',
+          'Estado de Credito': 'Al dia',
+          'Monto total del Credito [$]': '55000.00',
+          'Saldo Vencido': '0.00',
+          'Cuota Actual': '0',
+          'Cuotas Totales': '4',
+          'Fecha de vencimiento de Cuota': 'fecha',
+          'Fecha de inicio': 'fecha',
+          NOMBRE: 'nombre',
+          APELLIDO: 'apellido',
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
-const invalidSubJWT = jwt.sign(invalidSub, "semillaCrediticiaKey");
+const invalidSubJWT = jwt.sign(invalidSub, 'semillaCrediticiaKey');
 
-test("Validate sub field FAIL", async () => {
+test('Validate sub field FAIL', async () => {
   const result = await validateCredential(semillaCrediticia.v1, invalidSubJWT);
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
-  expect(result.errors[0].dataPath).toBe(".sub");
-  expect(result.errors[0].schemaPath).toBe("#/properties/sub/type");
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].keyword).toBe('type');
+  expect(result.errors[0].dataPath).toBe('.sub');
+  expect(result.errors[0].schemaPath).toBe('#/properties/sub/type');
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID ISS
+// INVALID ISS
 const invalidIss = {
   iat: 123456,
-  sub: "did:ethr:0x16",
+  sub: 'did:ethr:0x16',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Semillas Crediticia": {
-        category: "finance",
+      'Semillas Crediticia': {
+        category: 'finance',
         preview: {
           type: 2,
           fields: [
-            "Tipo de Credito",
-            "Estado de Credito",
-            "Saldo Vencido",
-            "Cuotas Totales",
+            'Tipo de Credito',
+            'Estado de Credito',
+            'Saldo Vencido',
+            'Cuotas Totales',
           ],
           cardLayout: null,
         },
         data: {
-          "CERTIFICADO O CURSO": "Semillas Crediticia",
-          "Dni Titular": "dni",
-          "Id Credito": "id del credito",
-          "Tipo de Credito": "Tipo de credito ",
-          "Id Grupo": "Id grupo",
-          "Ciclo del Credito": "Tipo de credito Ciclo 2",
-          "Estado de Credito": "Al dia",
-          "Monto total del Credito [$]": "55000.00",
-          "Saldo Vencido": "0.00",
-          "Cuota Actual": "0",
-          "Cuotas Totales": "4",
-          "Fecha de vencimiento de Cuota": "fecha",
-          "Fecha de inicio": "fecha",
-          NOMBRE: "nombre",
-          APELLIDO: "apellido",
+          'CERTIFICADO O CURSO': 'Semillas Crediticia',
+          'Dni Titular': 'dni',
+          'Id Credito': 'id del credito',
+          'Tipo de Credito': 'Tipo de credito ',
+          'Id Grupo': 'Id grupo',
+          'Ciclo del Credito': 'Tipo de credito Ciclo 2',
+          'Estado de Credito': 'Al dia',
+          'Monto total del Credito [$]': '55000.00',
+          'Saldo Vencido': '0.00',
+          'Cuota Actual': '0',
+          'Cuotas Totales': '4',
+          'Fecha de vencimiento de Cuota': 'fecha',
+          'Fecha de inicio': 'fecha',
+          NOMBRE: 'nombre',
+          APELLIDO: 'apellido',
         },
       },
     },
@@ -153,203 +154,203 @@ const invalidIss = {
   iss: 44,
 };
 
-const invalidIssJWT = jwt.sign(invalidIss, "semillaCrediticiaKey");
+const invalidIssJWT = jwt.sign(invalidIss, 'semillaCrediticiaKey');
 
-test("Validate iss field FAIL", async () => {
+test('Validate iss field FAIL', async () => {
   const result = await validateCredential(semillaCrediticia.v1, invalidIssJWT);
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
-  expect(result.errors[0].dataPath).toBe(".iss");
-  expect(result.errors[0].schemaPath).toBe("#/properties/iss/type");
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].keyword).toBe('type');
+  expect(result.errors[0].dataPath).toBe('.iss');
+  expect(result.errors[0].schemaPath).toBe('#/properties/iss/type');
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID PREVIEW TYPE
+// INVALID PREVIEW TYPE
 const invalidPreviewType = {
   iat: 123456,
-  sub: "did:ethr:0x16",
+  sub: 'did:ethr:0x16',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Semillas Crediticia": {
-        category: "finance",
+      'Semillas Crediticia': {
+        category: 'finance',
         preview: {
-          type: "2",
+          type: '2',
           fields: [
-            "Tipo de Credito",
-            "Estado de Credito",
-            "Saldo Vencido",
-            "Cuotas Totales",
+            'Tipo de Credito',
+            'Estado de Credito',
+            'Saldo Vencido',
+            'Cuotas Totales',
           ],
           cardLayout: null,
         },
         data: {
-          "CERTIFICADO O CURSO": "Semillas Crediticia",
-          "Dni Titular": "dni",
-          "Id Credito": "id del credito",
-          "Tipo de Credito": "Tipo de credito ",
-          "Id Grupo": "Id grupo",
-          "Ciclo del Credito": "Tipo de credito Ciclo 2",
-          "Estado de Credito": "Al dia",
-          "Monto total del Credito [$]": "55000.00",
-          "Saldo Vencido": "0.00",
-          "Cuota Actual": "0",
-          "Cuotas Totales": "4",
-          "Fecha de vencimiento de Cuota": "fecha",
-          "Fecha de inicio": "fecha",
-          NOMBRE: "nombre",
-          APELLIDO: "apellido",
+          'CERTIFICADO O CURSO': 'Semillas Crediticia',
+          'Dni Titular': 'dni',
+          'Id Credito': 'id del credito',
+          'Tipo de Credito': 'Tipo de credito ',
+          'Id Grupo': 'Id grupo',
+          'Ciclo del Credito': 'Tipo de credito Ciclo 2',
+          'Estado de Credito': 'Al dia',
+          'Monto total del Credito [$]': '55000.00',
+          'Saldo Vencido': '0.00',
+          'Cuota Actual': '0',
+          'Cuotas Totales': '4',
+          'Fecha de vencimiento de Cuota': 'fecha',
+          'Fecha de inicio': 'fecha',
+          NOMBRE: 'nombre',
+          APELLIDO: 'apellido',
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
 const invalidPreviewTypeJWT = jwt.sign(
   invalidPreviewType,
-  "semillaCrediticiaKey"
+  'semillaCrediticiaKey',
 );
 
 test(`Validate .vc.credentialSubject['Semillas Crediticia'].preview.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaCrediticia.v1,
-    invalidPreviewTypeJWT
+    invalidPreviewTypeJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
+  expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Semillas Crediticia'].preview.type`
+    `.vc.credentialSubject['Semillas Crediticia'].preview.type`,
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/vc/properties/credentialSubject/properties/Semillas%20Crediticia/properties/preview/properties/type/type"
+    '#/properties/vc/properties/credentialSubject/properties/Semillas%20Crediticia/properties/preview/properties/type/type',
   );
-  expect(result.errors[0].params.type).toBe("integer");
-  expect(result.errors[0].message).toBe("should be integer");
+  expect(result.errors[0].params.type).toBe('integer');
+  expect(result.errors[0].message).toBe('should be integer');
 });
 
-//INVALID DATA TYPE
+// INVALID DATA TYPE
 const invalidDataType = {
   iat: 123456,
-  sub: "did:ethr:0x16",
+  sub: 'did:ethr:0x16',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Semillas Crediticia": {
-        category: "finance",
+      'Semillas Crediticia': {
+        category: 'finance',
         preview: {
           type: 2,
           fields: [
-            "Tipo de Credito",
-            "Estado de Credito",
-            "Saldo Vencido",
-            "Cuotas Totales",
+            'Tipo de Credito',
+            'Estado de Credito',
+            'Saldo Vencido',
+            'Cuotas Totales',
           ],
           cardLayout: null,
         },
         data: {
-          "CERTIFICADO O CURSO": 23,
-          "Dni Titular": "dni",
-          "Id Credito": "id del credito",
-          "Tipo de Credito": "Tipo de credito ",
-          "Id Grupo": "Id grupo",
-          "Ciclo del Credito": "Tipo de credito Ciclo 2",
-          "Estado de Credito": "Al dia",
-          "Monto total del Credito [$]": "55000.00",
-          "Saldo Vencido": "0.00",
-          "Cuota Actual": "0",
-          "Cuotas Totales": "4",
-          "Fecha de vencimiento de Cuota": "fecha",
-          "Fecha de inicio": "fecha",
-          NOMBRE: "nombre",
-          APELLIDO: "apellido",
+          'CERTIFICADO O CURSO': 23,
+          'Dni Titular': 'dni',
+          'Id Credito': 'id del credito',
+          'Tipo de Credito': 'Tipo de credito ',
+          'Id Grupo': 'Id grupo',
+          'Ciclo del Credito': 'Tipo de credito Ciclo 2',
+          'Estado de Credito': 'Al dia',
+          'Monto total del Credito [$]': '55000.00',
+          'Saldo Vencido': '0.00',
+          'Cuota Actual': '0',
+          'Cuotas Totales': '4',
+          'Fecha de vencimiento de Cuota': 'fecha',
+          'Fecha de inicio': 'fecha',
+          NOMBRE: 'nombre',
+          APELLIDO: 'apellido',
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
-const invalidDataTypeJWT = jwt.sign(invalidDataType, "semillaCrediticiaKey");
+const invalidDataTypeJWT = jwt.sign(invalidDataType, 'semillaCrediticiaKey');
 
 test(`Validate .vc.credentialSubject['Semillas Crediticia'].data.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaCrediticia.v1,
-    invalidDataTypeJWT
+    invalidDataTypeJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
+  expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Semillas Crediticia'].data['CERTIFICADO O CURSO']`
+    `.vc.credentialSubject['Semillas Crediticia'].data['CERTIFICADO O CURSO']`,
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/vc/properties/credentialSubject/properties/Semillas%20Crediticia/properties/data/properties/CERTIFICADO%20O%20CURSO/type"
+    '#/properties/vc/properties/credentialSubject/properties/Semillas%20Crediticia/properties/data/properties/CERTIFICADO%20O%20CURSO/type',
   );
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID CATEGORY
+// INVALID CATEGORY
 const invalidCategory = {
   iat: 123456,
-  sub: "did:ethr:0x16",
+  sub: 'did:ethr:0x16',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Semillas Crediticia": {
+      'Semillas Crediticia': {
         category: 23,
         preview: {
           type: 2,
           fields: [
-            "Tipo de Credito",
-            "Estado de Credito",
-            "Saldo Vencido",
-            "Cuotas Totales",
+            'Tipo de Credito',
+            'Estado de Credito',
+            'Saldo Vencido',
+            'Cuotas Totales',
           ],
           cardLayout: null,
         },
         data: {
-          "CERTIFICADO O CURSO": "Semillas Crediticia",
-          "Dni Titular": "dni",
-          "Id Credito": "id del credito",
-          "Tipo de Credito": "Tipo de credito ",
-          "Id Grupo": "Id grupo",
-          "Ciclo del Credito": "Tipo de credito Ciclo 2",
-          "Estado de Credito": "Al dia",
-          "Monto total del Credito [$]": "55000.00",
-          "Saldo Vencido": "0.00",
-          "Cuota Actual": "0",
-          "Cuotas Totales": "4",
-          "Fecha de vencimiento de Cuota": "fecha",
-          "Fecha de inicio": "fecha",
-          NOMBRE: "nombre",
-          APELLIDO: "apellido",
+          'CERTIFICADO O CURSO': 'Semillas Crediticia',
+          'Dni Titular': 'dni',
+          'Id Credito': 'id del credito',
+          'Tipo de Credito': 'Tipo de credito ',
+          'Id Grupo': 'Id grupo',
+          'Ciclo del Credito': 'Tipo de credito Ciclo 2',
+          'Estado de Credito': 'Al dia',
+          'Monto total del Credito [$]': '55000.00',
+          'Saldo Vencido': '0.00',
+          'Cuota Actual': '0',
+          'Cuotas Totales': '4',
+          'Fecha de vencimiento de Cuota': 'fecha',
+          'Fecha de inicio': 'fecha',
+          NOMBRE: 'nombre',
+          APELLIDO: 'apellido',
         },
       },
     },
   },
-  iss: "did:ethr:0x16",
+  iss: 'did:ethr:0x16',
 };
 
-const invalidCategoryJWT = jwt.sign(invalidCategory, "semillaCrediticiaKey");
+const invalidCategoryJWT = jwt.sign(invalidCategory, 'semillaCrediticiaKey');
 
 test(`Validate .vc.credentialSubject['Semillas Crediticia'].category.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaCrediticia.v1,
-    invalidCategoryJWT
+    invalidCategoryJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
+  expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Semillas Crediticia'].category`
+    `.vc.credentialSubject['Semillas Crediticia'].category`,
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/vc/properties/credentialSubject/properties/Semillas%20Crediticia/properties/category/type"
+    '#/properties/vc/properties/credentialSubject/properties/Semillas%20Crediticia/properties/category/type',
   );
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
