@@ -1,1 +1,1 @@
-export * as shareRequestSchema from "./shareRequest-schema";
+export * as shareRequestSchema from './shareRequest-schema';

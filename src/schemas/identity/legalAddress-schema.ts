@@ -1,225 +1,225 @@
 export const v2 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
-            "Domicilio Legal": {
-              type: "object",
+            'Domicilio Legal': {
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     streetAddress: {
                       propierties: {
                         streetAddress: {
-                          type: "string",
+                          type: 'string',
                         },
                         numberStreet: {
-                          type: "string",
+                          type: 'string',
                         },
                       },
                     },
                     floor: {
-                      type: "string",
+                      type: 'string',
                     },
                     department: {
-                      type: "string",
+                      type: 'string',
                     },
                     zipCode: {
-                      type: "string",
+                      type: 'string',
                     },
                     city: {
-                      type: "string",
+                      type: 'string',
                     },
                     municipality: {
-                      type: "string",
+                      type: 'string',
                     },
                     province: {
-                      type: "string",
+                      type: 'string',
                     },
                     country: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
                   required: [
-                    "streetAddress",
-                    "zipCode",
-                    "city",
-                    "province",
-                    "country",
+                    'streetAddress',
+                    'zipCode',
+                    'city',
+                    'province',
+                    'country',
                   ],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Domicilio Legal"],
+          required: ['Domicilio Legal'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };
 
 export const v1 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
-            "Domicilio Legal": {
-              type: "object",
+            'Domicilio Legal': {
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     streetAddress: {
-                      type: "string",
+                      type: 'string',
                     },
                     numberStreet: {
-                      type: "string",
+                      type: 'string',
                     },
                     floor: {
-                      type: "string",
+                      type: 'string',
                     },
                     department: {
-                      type: "string",
+                      type: 'string',
                     },
                     zipCode: {
-                      type: "string",
+                      type: 'string',
                     },
                     city: {
-                      type: "string",
+                      type: 'string',
                     },
                     municipality: {
-                      type: "string",
+                      type: 'string',
                     },
                     province: {
-                      type: "string",
+                      type: 'string',
                     },
                     country: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
                   required: [
-                    "streetAddress",
-                    "numberStreet",
-                    "floor",
-                    "department",
-                    "zipCode",
-                    "city",
-                    "municipality",
-                    "province",
-                    "country",
+                    'streetAddress',
+                    'numberStreet',
+                    'floor',
+                    'department',
+                    'zipCode',
+                    'city',
+                    'municipality',
+                    'province',
+                    'country',
                   ],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Domicilio Legal"],
+          required: ['Domicilio Legal'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };

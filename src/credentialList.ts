@@ -1,14 +1,14 @@
 import * as schemas from './schemas';
 
-export function getTypes(): string[]  {
+export function getTypes(): string[] {
   let types: string[] = [];
   Object.values(schemas).forEach((category: object) => {
-    types = [...types, ...Object.keys(category)]
-  })  
+    types = [...types, ...Object.keys(category)];
+  });
   return types;
 }
 
-export function getCategories(): string[]  {
+export function getCategories(): string[] {
   const categories: string[] = Object.keys(schemas);
   return categories;
 }

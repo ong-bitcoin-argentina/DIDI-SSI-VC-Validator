@@ -1,261 +1,261 @@
 export const v2 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
-            "Semillas Crediticia": {
-              type: "object",
+            'Semillas Crediticia': {
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     credentialName: {
-                      type: "string",
+                      type: 'string',
                     },
                     dni: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditId: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditType: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditGroupID: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditCycle: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditStatus: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditTotalAmount: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditBalanceDue: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditCurrentInstallment: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditTotalInstallments: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditDatePaymentDue: {
-                      type: "string",
+                      type: 'string',
                     },
                     creditStartDate: {
-                      type: "string",
+                      type: 'string',
                     },
                     givenName: {
-                      type: "string",
+                      type: 'string',
                     },
                     familyName: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
                   required: [
-                    "credentialName",
-                    "dni",
-                    "creditStatus",
-                    "creditTotalAmount",
-                    "creditCurrentInstallment",
-                    "creditTotalInstallments",
-                    "creditStartDate",
-                    "givenName",
-                    "familyName",
+                    'credentialName',
+                    'dni',
+                    'creditStatus',
+                    'creditTotalAmount',
+                    'creditCurrentInstallment',
+                    'creditTotalInstallments',
+                    'creditStartDate',
+                    'givenName',
+                    'familyName',
                   ],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Semillas Crediticia"],
+          required: ['Semillas Crediticia'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };
 
 export const v1 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
-            "Semillas Crediticia": {
-              type: "object",
+            'Semillas Crediticia': {
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
-                    "CERTIFICADO O CURSO": {
-                      type: "string",
+                    'CERTIFICADO O CURSO': {
+                      type: 'string',
                     },
-                    "Dni Titular": {
-                      type: "string",
+                    'Dni Titular': {
+                      type: 'string',
                     },
-                    "Id Credito": {
-                      type: "string",
+                    'Id Credito': {
+                      type: 'string',
                     },
-                    "Tipo de Credito": {
-                      type: "string",
+                    'Tipo de Credito': {
+                      type: 'string',
                     },
-                    "Id Grupo": {
-                      type: "string",
+                    'Id Grupo': {
+                      type: 'string',
                     },
-                    "Ciclo del Credito": {
-                      type: "string",
+                    'Ciclo del Credito': {
+                      type: 'string',
                     },
-                    "Estado de Credito": {
-                      type: "string",
+                    'Estado de Credito': {
+                      type: 'string',
                     },
-                    "Monto total del Credito [$]": {
-                      type: "string",
+                    'Monto total del Credito [$]': {
+                      type: 'string',
                     },
-                    "Saldo Vencido": {
-                      type: "string",
+                    'Saldo Vencido': {
+                      type: 'string',
                     },
-                    "Cuota Actual": {
-                      type: "string",
+                    'Cuota Actual': {
+                      type: 'string',
                     },
-                    "Cuotas Totales": {
-                      type: "string",
+                    'Cuotas Totales': {
+                      type: 'string',
                     },
-                    "Fecha de Vencimiento de Cuota": {
-                      type: "string",
+                    'Fecha de Vencimiento de Cuota': {
+                      type: 'string',
                     },
-                    "Fecha de inicio": {
-                      type: "string",
+                    'Fecha de inicio': {
+                      type: 'string',
                     },
                     NOMBRE: {
-                      type: "string",
+                      type: 'string',
                     },
                     APELLIDO: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
                   required: [
-                    "CERTIFICADO O CURSO",
-                    "Dni Titular",
-                    "Estado de Credito",
-                    "Monto total del Credito [$]",
-                    "Cuota Actual",
-                    "Cuotas Totales",
-                    "Fecha de inicio",
-                    "NOMBRE",
-                    "APELLIDO",
+                    'CERTIFICADO O CURSO',
+                    'Dni Titular',
+                    'Estado de Credito',
+                    'Monto total del Credito [$]',
+                    'Cuota Actual',
+                    'Cuotas Totales',
+                    'Fecha de inicio',
+                    'NOMBRE',
+                    'APELLIDO',
                   ],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Semillas Crediticia"],
+          required: ['Semillas Crediticia'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };

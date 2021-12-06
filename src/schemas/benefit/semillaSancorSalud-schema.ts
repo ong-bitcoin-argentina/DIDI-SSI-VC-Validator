@@ -1,265 +1,265 @@
 export const v2 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
-            "Sancor Salud": {
-              type: "object",
+            'Sancor Salud': {
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                     cardLayout: {
-                      type: "object",
+                      type: 'object',
                       properties: {
                         rows: {
-                          type: "array",
+                          type: 'array',
                           items: [
                             {
-                              columns: "integer",
+                              columns: 'integer',
                             },
                             {
-                              columns: "integer",
+                              columns: 'integer',
                             },
                             {
-                              columns: "integer",
+                              columns: 'integer',
                             },
                             {
-                              columns: "integer",
+                              columns: 'integer',
                             },
                           ],
                         },
                       },
                     },
                     backgroundImage: {
-                      type: "string",
+                      type: 'string',
                     },
                     style: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     credentialName: {
-                      type: "string",
+                      type: 'string',
                     },
                     policyId: {
-                      type: "string",
+                      type: 'string',
                     },
                     certId: {
-                      type: "string",
+                      type: 'string',
                     },
                     refId: {
-                      type: "string",
+                      type: 'string',
                     },
                     dni: {
-                      type: "string",
+                      type: 'string',
                     },
                     givenName: {
-                      type: "string",
+                      type: 'string',
                     },
                     familyName: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
                   required: [
-                    "credentialName",
-                    "policyId",
-                    "certId",
-                    "refId",
-                    "dni",
-                    "givenName",
-                    "familyName",
+                    'credentialName',
+                    'policyId',
+                    'certId',
+                    'refId',
+                    'dni',
+                    'givenName',
+                    'familyName',
                   ],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Sancor Salud"],
+          required: ['Sancor Salud'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };
 
 export const v1 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
-            "Sancor Salud": {
-              type: "object",
+            'Sancor Salud': {
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                     cardLayout: {
-                      type: "object",
+                      type: 'object',
                       properties: {
                         rows: {
-                          type: "array",
+                          type: 'array',
                           items: [
                             {
-                              columns: "integer",
+                              columns: 'integer',
                             },
                             {
-                              columns: "integer",
+                              columns: 'integer',
                             },
                             {
-                              columns: "integer",
+                              columns: 'integer',
                             },
                             {
-                              columns: "integer",
+                              columns: 'integer',
                             },
                           ],
                         },
                       },
                     },
                     backgroundImage: {
-                      type: "string",
+                      type: 'string',
                     },
                     style: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
-                    "CERTIFICADO O CURSO": {
-                      type: "string",
+                    'CERTIFICADO O CURSO': {
+                      type: 'string',
                     },
                     POLIZA: {
-                      type: "string",
+                      type: 'string',
                     },
                     CERT: {
-                      type: "string",
+                      type: 'string',
                     },
                     REF: {
-                      type: "string",
+                      type: 'string',
                     },
                     DNI: {
-                      type: "string",
+                      type: 'string',
                     },
                     NOMBRE: {
-                      type: "string",
+                      type: 'string',
                     },
                     APELLIDO: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
                   required: [
-                    "CERTIFICADO O CURSO",
-                    "POLIZA",
-                    "CERT",
-                    "REF",
-                    "DNI",
-                    "NOMBRE",
-                    "APELLIDO",
+                    'CERTIFICADO O CURSO',
+                    'POLIZA',
+                    'CERT',
+                    'REF',
+                    'DNI',
+                    'NOMBRE',
+                    'APELLIDO',
                   ],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Sancor Salud"],
+          required: ['Sancor Salud'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };
