@@ -3,13 +3,14 @@ name: Ejecutar tests al hacer push
 jobs:
   tests:
     runs-on: ubuntu-latest
-      - name: "clone and checkout"
+    steps:
+      - name: 'clone and checkout'
         uses: actions/checkout@v1
-      - name: "install dependencies"
+      - name: 'install dependencies'
         run: npm install
-      - name: "run ESlint"
+      - name: 'run ESlint'
         run: npm lint
-      - name: "run Eslint:fix"
+      - name: 'run Eslint:fix'
         run: npm lint:fix
-      - name: "run tests"
+      - name: 'run tests'
         run: npm test
