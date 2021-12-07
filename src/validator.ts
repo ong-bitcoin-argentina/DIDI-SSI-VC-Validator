@@ -13,10 +13,8 @@ export function validateCredential(
 ): ValidateCredentialType {
   const ajv = new Ajv();
   const validate = ajv.compile(schema);
-  // eslint-disable-next-line prefer-const
-  let decoded = jwt_decode(jwt);
-  // eslint-disable-next-line prefer-const
-  let valid = validate(decoded);
+  const decoded = jwt_decode(jwt);
+  const valid = validate(decoded);
   if (!valid) {
     return {
       status: false,
