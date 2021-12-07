@@ -9,8 +9,8 @@ jobs:
       - name: 'install dependencies'
         run: npm install
       - name: 'run ESlint'
-        run: npm lint
+        run: npm run lint
       - name: 'run Eslint:fix'
-        run: npm lint:fix
-      - name: 'run tests'
+        run: npm run lint:fix
+      - name: 'npm run tests'
         run: npm test
