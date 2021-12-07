@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint **/*.ts",
-    "lint-fix": "eslint **/*.ts --fix"
+    "lint:fix": "eslint **/*.ts --fix"
   },
   "repository": {
     "type": "git",
