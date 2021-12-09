@@ -1,150 +1,151 @@
-const { createSemicolonClassElement } = require("typescript");
+const { createSemicolonClassElement } = require('typescript');
 
-const jwt = require("jsonwebtoken");
-const { jwtDecode } = require("jwt-decode");
-const { validateCredential } = require("../src/validator");
-import { semillaIdFamiliar } from "../src/schemas/finance";
+const jwt = require('jsonwebtoken');
+const { jwtDecode } = require('jwt-decode');
+const { validateCredential } = require('../src/validator');
+
+import { semillaIdFamiliar } from '../src/schemas/finance';
 
 const valid = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Identidad Familiar": {
+      'Identidad Familiar': {
         data: {
-          credentialName: "CertificadoTest",
-          dni: "dni",
-          givenName: "nombre",
-          familyName: "apellido",
-          holderRelation: "parentezco",
-          beneficiaryDni: "dni",
-          beneficiaryGivenName: "nombre",
-          beneficiaryFamilyName: "apellido",
-          gender: "sexo",
-          birthDate: "fecha de nacimiento",
+          credentialName: 'CertificadoTest',
+          dni: 'dni',
+          givenName: 'nombre',
+          familyName: 'apellido',
+          holderRelation: 'parentezco',
+          beneficiaryDni: 'dni',
+          beneficiaryGivenName: 'nombre',
+          beneficiaryFamilyName: 'apellido',
+          gender: 'sexo',
+          birthDate: 'fecha de nacimiento',
         },
-        category: "finance",
+        category: 'finance',
         preview: {
           type: 1,
           fields: [
-            "credentialName",
-            "dni",
-            "givenName",
-            "familyName",
-            "holderRelation",
-            "beneficiaryDni",
-            "beneficiaryGivenName",
-            "beneficiaryFamilyName",
-            "gender",
-            "birthDate",
+            'credentialName',
+            'dni',
+            'givenName',
+            'familyName',
+            'holderRelation',
+            'beneficiaryDni',
+            'beneficiaryGivenName',
+            'beneficiaryFamilyName',
+            'gender',
+            'birthDate',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x2b184203babefe306901a76b053bc38659e4a795",
+  iss: 'did:ethr:0x2b184203babefe306901a76b053bc38659e4a795',
 };
 
-const validJWT = jwt.sign(valid, "semillaIdFamiliarKey");
+const validJWT = jwt.sign(valid, 'semillaIdFamiliarKey');
 
-test("Validate ok", async () => {
+test('Validate ok', async () => {
   const result = await validateCredential(semillaIdFamiliar.v1, validJWT);
   expect(result.status).toBe(true);
   expect(result.errors).toBe(null);
 });
 
-//INVALID SUB
+// INVALID SUB
 const invalidSub = {
   iat: 123456,
   sub: 1232123,
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Identidad Familiar": {
+      'Identidad Familiar': {
         data: {
-          credentialName: "CertificadoTest",
-          dni: "dni",
-          givenName: "nombre",
-          familyName: "apellido",
-          holderRelation: "parentezco",
-          beneficiaryDni: "dni",
-          beneficiaryGivenName: "nombre",
-          beneficiaryFamilyName: "apellido",
-          gender: "sexo",
-          birthDate: "fecha de nacimiento",
+          credentialName: 'CertificadoTest',
+          dni: 'dni',
+          givenName: 'nombre',
+          familyName: 'apellido',
+          holderRelation: 'parentezco',
+          beneficiaryDni: 'dni',
+          beneficiaryGivenName: 'nombre',
+          beneficiaryFamilyName: 'apellido',
+          gender: 'sexo',
+          birthDate: 'fecha de nacimiento',
         },
-        category: "finance",
+        category: 'finance',
         preview: {
           type: 1,
           fields: [
-            "credentialName",
-            "dni",
-            "givenName",
-            "familyName",
-            "holderRelation",
-            "beneficiaryDni",
-            "beneficiaryGivenName",
-            "beneficiaryFamilyName",
-            "gender",
-            "birthDate",
+            'credentialName',
+            'dni',
+            'givenName',
+            'familyName',
+            'holderRelation',
+            'beneficiaryDni',
+            'beneficiaryGivenName',
+            'beneficiaryFamilyName',
+            'gender',
+            'birthDate',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x2b184203babefe306901a76b053bc38659e4a795",
+  iss: 'did:ethr:0x2b184203babefe306901a76b053bc38659e4a795',
 };
 
-const invalidSubJWT = jwt.sign(invalidSub, "semillaIdFamiliarKey");
+const invalidSubJWT = jwt.sign(invalidSub, 'semillaIdFamiliarKey');
 
-test("Validate sub field FAIL", async () => {
+test('Validate sub field FAIL', async () => {
   const result = await validateCredential(semillaIdFamiliar.v1, invalidSubJWT);
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
-  expect(result.errors[0].dataPath).toBe(".sub");
-  expect(result.errors[0].schemaPath).toBe("#/properties/sub/type");
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].keyword).toBe('type');
+  expect(result.errors[0].dataPath).toBe('.sub');
+  expect(result.errors[0].schemaPath).toBe('#/properties/sub/type');
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID ISS
+// INVALID ISS
 const invalidIss = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Identidad Familiar": {
+      'Identidad Familiar': {
         data: {
-          credentialName: "CertificadoTest",
-          dni: "dni",
-          givenName: "nombre",
-          familyName: "apellido",
-          holderRelation: "parentezco",
-          beneficiaryDni: "dni",
-          beneficiaryGivenName: "nombre",
-          beneficiaryFamilyName: "apellido",
-          gender: "sexo",
-          birthDate: "fecha de nacimiento",
+          credentialName: 'CertificadoTest',
+          dni: 'dni',
+          givenName: 'nombre',
+          familyName: 'apellido',
+          holderRelation: 'parentezco',
+          beneficiaryDni: 'dni',
+          beneficiaryGivenName: 'nombre',
+          beneficiaryFamilyName: 'apellido',
+          gender: 'sexo',
+          birthDate: 'fecha de nacimiento',
         },
-        category: "finance",
+        category: 'finance',
         preview: {
           type: 1,
           fields: [
-            "credentialName",
-            "dni",
-            "givenName",
-            "familyName",
-            "holderRelation",
-            "beneficiaryDni",
-            "beneficiaryGivenName",
-            "beneficiaryFamilyName",
-            "gender",
-            "birthDate",
+            'credentialName',
+            'dni',
+            'givenName',
+            'familyName',
+            'holderRelation',
+            'beneficiaryDni',
+            'beneficiaryGivenName',
+            'beneficiaryFamilyName',
+            'gender',
+            'birthDate',
           ],
         },
       },
@@ -153,204 +154,204 @@ const invalidIss = {
   iss: 3333,
 };
 
-const invalidIssJWT = jwt.sign(invalidIss, "semillaIdFamiliarKey");
+const invalidIssJWT = jwt.sign(invalidIss, 'semillaIdFamiliarKey');
 
-test("Validate iss field FAIL", async () => {
+test('Validate iss field FAIL', async () => {
   const result = await validateCredential(semillaIdFamiliar.v1, invalidIssJWT);
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
-  expect(result.errors[0].dataPath).toBe(".iss");
-  expect(result.errors[0].schemaPath).toBe("#/properties/iss/type");
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].keyword).toBe('type');
+  expect(result.errors[0].dataPath).toBe('.iss');
+  expect(result.errors[0].schemaPath).toBe('#/properties/iss/type');
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID PREVIEW TYPE
+// INVALID PREVIEW TYPE
 const invalidPreviewType = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Identidad Familiar": {
+      'Identidad Familiar': {
         data: {
-          credentialName: "CertificadoTest",
-          dni: "dni",
-          givenName: "nombre",
-          familyName: "apellido",
-          holderRelation: "parentezco",
-          beneficiaryDni: "dni",
-          beneficiaryGivenName: "nombre",
-          beneficiaryFamilyName: "apellido",
-          gender: "sexo",
-          birthDate: "fecha de nacimiento",
+          credentialName: 'CertificadoTest',
+          dni: 'dni',
+          givenName: 'nombre',
+          familyName: 'apellido',
+          holderRelation: 'parentezco',
+          beneficiaryDni: 'dni',
+          beneficiaryGivenName: 'nombre',
+          beneficiaryFamilyName: 'apellido',
+          gender: 'sexo',
+          birthDate: 'fecha de nacimiento',
         },
-        category: "finance",
+        category: 'finance',
         preview: {
-          type: "1",
+          type: '1',
           fields: [
-            "credentialName",
-            "dni",
-            "givenName",
-            "familyName",
-            "holderRelation",
-            "beneficiaryDni",
-            "beneficiaryGivenName",
-            "beneficiaryFamilyName",
-            "gender",
-            "birthDate",
+            'credentialName',
+            'dni',
+            'givenName',
+            'familyName',
+            'holderRelation',
+            'beneficiaryDni',
+            'beneficiaryGivenName',
+            'beneficiaryFamilyName',
+            'gender',
+            'birthDate',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x2b184203babefe306901a76b053bc38659e4a795",
+  iss: 'did:ethr:0x2b184203babefe306901a76b053bc38659e4a795',
 };
 
 const invalidPreviewTypeJWT = jwt.sign(
   invalidPreviewType,
-  "semillaIdFamiliarKey"
+  'semillaIdFamiliarKey',
 );
 
 test(`Validate .vc.credentialSubject['Identidad Familiar'].preview.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaIdFamiliar.v1,
-    invalidPreviewTypeJWT
+    invalidPreviewTypeJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
+  expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Identidad Familiar'].preview.type`
+    `.vc.credentialSubject['Identidad Familiar'].preview.type`,
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/vc/properties/credentialSubject/properties/Identidad%20Familiar/properties/preview/properties/type/type"
+    '#/properties/vc/properties/credentialSubject/properties/Identidad%20Familiar/properties/preview/properties/type/type',
   );
-  expect(result.errors[0].params.type).toBe("integer");
-  expect(result.errors[0].message).toBe("should be integer");
+  expect(result.errors[0].params.type).toBe('integer');
+  expect(result.errors[0].message).toBe('should be integer');
 });
 
-//INVALID DATA TYPE
+// INVALID DATA TYPE
 const invalidDataType = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Identidad Familiar": {
+      'Identidad Familiar': {
         data: {
           credentialName: 123,
-          dni: "dni",
-          givenName: "nombre",
-          familyName: "apellido",
-          holderRelation: "parentezco",
-          beneficiaryDni: "dni",
-          beneficiaryGivenName: "nombre",
-          beneficiaryFamilyName: "apellido",
-          gender: "sexo",
-          birthDate: "fecha de nacimiento",
+          dni: 'dni',
+          givenName: 'nombre',
+          familyName: 'apellido',
+          holderRelation: 'parentezco',
+          beneficiaryDni: 'dni',
+          beneficiaryGivenName: 'nombre',
+          beneficiaryFamilyName: 'apellido',
+          gender: 'sexo',
+          birthDate: 'fecha de nacimiento',
         },
-        category: "finance",
+        category: 'finance',
         preview: {
           type: 1,
           fields: [
-            "credentialName",
-            "dni",
-            "givenName",
-            "familyName",
-            "holderRelation",
-            "beneficiaryDni",
-            "beneficiaryGivenName",
-            "beneficiaryFamilyName",
-            "gender",
-            "birthDate",
+            'credentialName',
+            'dni',
+            'givenName',
+            'familyName',
+            'holderRelation',
+            'beneficiaryDni',
+            'beneficiaryGivenName',
+            'beneficiaryFamilyName',
+            'gender',
+            'birthDate',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x2b184203babefe306901a76b053bc38659e4a795",
+  iss: 'did:ethr:0x2b184203babefe306901a76b053bc38659e4a795',
 };
 
-const invalidDataTypeJWT = jwt.sign(invalidDataType, "semillaIdFamiliarKey");
+const invalidDataTypeJWT = jwt.sign(invalidDataType, 'semillaIdFamiliarKey');
 
 test(`Validate .vc.credentialSubject['Identidad Familiar'].data.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaIdFamiliar.v1,
-    invalidDataTypeJWT
+    invalidDataTypeJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
+  expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Identidad Familiar'].data.credentialName`
+    `.vc.credentialSubject['Identidad Familiar'].data.credentialName`,
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/vc/properties/credentialSubject/properties/Identidad%20Familiar/properties/data/properties/credentialName/type"
+    '#/properties/vc/properties/credentialSubject/properties/Identidad%20Familiar/properties/data/properties/credentialName/type',
   );
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
 
-//INVALID CATEGORY
+// INVALID CATEGORY
 
 const invalidCategory = {
   iat: 123456,
-  sub: "1232123",
+  sub: '1232123',
   vc: {
-    "@context": ["https://www.w3.org/2018/credentials/v1"],
-    type: ["VerifiableCredential"],
+    '@context': ['https://www.w3.org/2018/credentials/v1'],
+    type: ['VerifiableCredential'],
     credentialSubject: {
-      "Identidad Familiar": {
+      'Identidad Familiar': {
         data: {
-          credentialName: "CertificadoTest",
-          dni: "dni",
-          givenName: "nombre",
-          familyName: "apellido",
-          holderRelation: "parentezco",
-          beneficiaryDni: "dni",
-          beneficiaryGivenName: "nombre",
-          beneficiaryFamilyName: "apellido",
-          gender: "sexo",
-          birthDate: "fecha de nacimiento",
+          credentialName: 'CertificadoTest',
+          dni: 'dni',
+          givenName: 'nombre',
+          familyName: 'apellido',
+          holderRelation: 'parentezco',
+          beneficiaryDni: 'dni',
+          beneficiaryGivenName: 'nombre',
+          beneficiaryFamilyName: 'apellido',
+          gender: 'sexo',
+          birthDate: 'fecha de nacimiento',
         },
         category: 3,
         preview: {
           type: 1,
           fields: [
-            "credentialName",
-            "dni",
-            "givenName",
-            "familyName",
-            "holderRelation",
-            "beneficiaryDni",
-            "beneficiaryGivenName",
-            "beneficiaryFamilyName",
-            "gender",
-            "birthDate",
+            'credentialName',
+            'dni',
+            'givenName',
+            'familyName',
+            'holderRelation',
+            'beneficiaryDni',
+            'beneficiaryGivenName',
+            'beneficiaryFamilyName',
+            'gender',
+            'birthDate',
           ],
         },
       },
     },
   },
-  iss: "did:ethr:0x2b184203babefe306901a76b053bc38659e4a795",
+  iss: 'did:ethr:0x2b184203babefe306901a76b053bc38659e4a795',
 };
 
-const invalidCategoryJWT = jwt.sign(invalidCategory, "semillaIdFamiliarKey");
+const invalidCategoryJWT = jwt.sign(invalidCategory, 'semillaIdFamiliarKey');
 
 test(`Validate .vc.credentialSubject['Identidad Familiar'].category.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaIdFamiliar.v1,
-    invalidCategoryJWT
+    invalidCategoryJWT,
   );
   expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe("type");
+  expect(result.errors[0].keyword).toBe('type');
   expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Identidad Familiar'].category`
+    `.vc.credentialSubject['Identidad Familiar'].category`,
   );
   expect(result.errors[0].schemaPath).toBe(
-    "#/properties/vc/properties/credentialSubject/properties/Identidad%20Familiar/properties/category/type"
+    '#/properties/vc/properties/credentialSubject/properties/Identidad%20Familiar/properties/category/type',
   );
-  expect(result.errors[0].params.type).toBe("string");
-  expect(result.errors[0].message).toBe("should be string");
+  expect(result.errors[0].params.type).toBe('string');
+  expect(result.errors[0].message).toBe('should be string');
 });
