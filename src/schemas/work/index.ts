@@ -1,1 +1,1 @@
-export * as semillaEmprendimiento from "./semillaEmprendimiento-schema";
+export * as semillaEmprendimiento from './semillaEmprendimiento-schema';

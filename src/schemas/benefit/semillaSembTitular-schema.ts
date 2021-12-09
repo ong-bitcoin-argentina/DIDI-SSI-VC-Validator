@@ -1,191 +1,191 @@
 export const v2 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
-            "Sembrando - Titular": {
-              type: "object",
+            'Sembrando - Titular': {
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     credentialName: {
-                      type: "string",
+                      type: 'string',
                     },
                     dni: {
-                      type: "string",
+                      type: 'string',
                     },
                     benefitHolderType: {
-                      type: "string",
+                      type: 'string',
                     },
                     givenName: {
-                      type: "string",
+                      type: 'string',
                     },
                     familyName: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
                   required: [
-                    "credentialName",
-                    "dni",
-                    "givenName",
-                    "familyName",
+                    'credentialName',
+                    'dni',
+                    'givenName',
+                    'familyName',
                   ],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Sembrando - Titular"],
+          required: ['Sembrando - Titular'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };
 
 export const v1 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
-            "Semillas Beneficio": {
-              type: "object",
+            'Semillas Beneficio': {
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
-                    "CERTIFICADO O CURSO": {
-                      type: "string",
+                    'CERTIFICADO O CURSO': {
+                      type: 'string',
                     },
-                    "Dni Beneficiario": {
-                      type: "string",
+                    'Dni Beneficiario': {
+                      type: 'string',
                     },
                     Caracter: {
-                      type: "string",
+                      type: 'string',
                     },
                     NOMBRE: {
-                      type: "string",
+                      type: 'string',
                     },
                     APELLIDO: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
                   required: [
-                    "CERTIFICADO O CURSO",
-                    "Dni Beneficiario",
-                    "NOMBRE",
-                    "APELLIDO",
+                    'CERTIFICADO O CURSO',
+                    'Dni Beneficiario',
+                    'NOMBRE',
+                    'APELLIDO',
                   ],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Semillas Beneficio"],
+          required: ['Semillas Beneficio'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };

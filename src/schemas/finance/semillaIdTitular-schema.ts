@@ -1,115 +1,115 @@
 export const v1 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
-            "Identidad Titular": {
-              type: "object",
+            'Identidad Titular': {
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     credentialName: {
-                      type: "string",
+                      type: 'string',
                     },
                     dni: {
-                      type: "string",
+                      type: 'string',
                     },
                     givenName: {
-                      type: "string",
+                      type: 'string',
                     },
                     familyName: {
-                      type: "string",
+                      type: 'string',
                     },
                     holderRelation: {
-                      type: "string",
+                      type: 'string',
                     },
                     beneficiaryDni: {
-                      type: "string",
+                      type: 'string',
                     },
                     beneficiaryGivenName: {
-                      type: "string",
+                      type: 'string',
                     },
                     beneficiaryFamilyName: {
-                      type: "string",
+                      type: 'string',
                     },
                     gender: {
-                      type: "string",
+                      type: 'string',
                     },
                     birthDate: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
                   required: [
-                    "credentialName",
-                    "dni",
-                    "givenName",
-                    "familyName",
-                    "holderRelation",
-                    "beneficiaryDni",
-                    "beneficiaryGivenName",
-                    "beneficiaryFamilyName",
-                    "birthDate",
+                    'credentialName',
+                    'dni',
+                    'givenName',
+                    'familyName',
+                    'holderRelation',
+                    'beneficiaryDni',
+                    'beneficiaryGivenName',
+                    'beneficiaryFamilyName',
+                    'birthDate',
                   ],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Identidad Titular"],
+          required: ['Identidad Titular'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };

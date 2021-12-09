@@ -1,67 +1,68 @@
-import { getTypes } from "../../credentialList";
+import { getTypes } from '../../credentialList';
 
 const verifiableProperties = getTypes().reduce((_acc: any, valor: string) => {
+  // eslint-disable-next-line no-param-reassign
   _acc[valor] = {
-    type: "object",
+    type: 'object',
     properties: {
       essential: {
-        type: "boolean",
+        type: 'boolean',
       },
       iss: {
-        type: "array",
+        type: 'array',
         items: [
           {
-            type: "object",
+            type: 'object',
             properties: {
               did: {
-                type: "string",
+                type: 'string',
               },
               url: {
-                type: "string",
+                type: 'string',
               },
             },
-            required: ["url", "did"],
+            required: ['url', 'did'],
           },
         ],
       },
       reason: {
-        type: "string",
+        type: 'string',
       },
     },
-    required: ["iss", "reason"],
+    required: ['iss', 'reason'],
   };
   return _acc;
 }, {});
 
 export const v1 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     callback: {
-      type: "string",
+      type: 'string',
     },
     type: {
-      type: "string",
+      type: 'string',
     },
     claims: {
-      type: "object",
+      type: 'object',
       properties: {
         verifiable: {
-          type: "object",
+          type: 'object',
           properties: verifiableProperties,
           required: [],
         },
       },
-      required: ["verifiable"],
+      required: ['verifiable'],
     },
     aud: {
-      type: "string",
+      type: 'string',
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "callback", "type", "claims", "aud", "iss"],
+  required: ['iat', 'callback', 'type', 'claims', 'aud', 'iss'],
 };

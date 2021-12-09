@@ -1,1 +1,1 @@
-export * as livingPlace from "./livingPlace-schema";
+export * as livingPlace from './livingPlace-schema';

@@ -1,78 +1,78 @@
 export const v1 = {
-  type: "object",
+  type: 'object',
   properties: {
     iat: {
-      type: "integer",
+      type: 'integer',
     },
     sub: {
-      type: "string",
+      type: 'string',
     },
     vc: {
-      type: "object",
+      type: 'object',
       properties: {
-        "@context": {
-          type: "array",
+        '@context': {
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         type: {
-          type: "array",
+          type: 'array',
           items: [
             {
-              type: "string",
+              type: 'string',
             },
           ],
         },
         credentialSubject: {
-          type: "object",
+          type: 'object',
           properties: {
             Phone: {
-              type: "object",
+              type: 'object',
               properties: {
                 preview: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     type: {
-                      type: "integer",
+                      type: 'integer',
                     },
                     fields: {
-                      type: "array",
+                      type: 'array',
                       items: [
                         {
-                          type: "string",
+                          type: 'string',
                         },
                       ],
                     },
                   },
-                  required: ["type", "fields"],
+                  required: ['type', 'fields'],
                 },
                 category: {
-                  type: "string",
+                  type: 'string',
                 },
                 data: {
-                  type: "object",
+                  type: 'object',
                   properties: {
                     phoneNumber: {
-                      type: "string",
+                      type: 'string',
                     },
                   },
-                  required: ["phoneNumber"],
+                  required: ['phoneNumber'],
                 },
               },
-              required: ["preview", "category", "data"],
+              required: ['preview', 'category', 'data'],
             },
           },
-          required: ["Phone"],
+          required: ['Phone'],
         },
       },
-      required: ["@context", "type", "credentialSubject"],
+      required: ['@context', 'type', 'credentialSubject'],
     },
     iss: {
-      type: "string",
+      type: 'string',
     },
   },
-  required: ["iat", "sub", "vc", "iss"],
+  required: ['iat', 'sub', 'vc', 'iss'],
 };
