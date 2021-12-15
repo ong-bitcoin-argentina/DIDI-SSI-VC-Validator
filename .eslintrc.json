@@ -11,12 +11,9 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "no-unused-vars": "off",
     "import/prefer-default-export": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
-    "no-undef": "off",
-    "import/first": "off",
-    "import/order": "off"
+    "import/first": "off"
   }
 }
