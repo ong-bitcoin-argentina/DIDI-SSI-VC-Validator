@@ -4,9 +4,13 @@
   "description": "Verifiable Credentials validator",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest",
+    "build": "tsc",
     "lint": "eslint **/*.ts",
-    "lint:fix": "eslint **/*.ts --fix"
+    "lint:fix": "eslint **/*.ts --fix",
+    "npm:publish": "npm publish --access public",
+    "prenpm:publish": "npm run lint && npm run build",
+    "test": "jest",
+    "typeCheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
