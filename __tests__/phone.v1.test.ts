@@ -12,13 +12,13 @@ const phoneSubFieldFail =
 const phoneIssFieldFail =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzA0NDU2OTIsInN1YiI6ImRpZDpldGhyOjB4ODRiMmYxYzM0MzE3NmQyNjRhMThlOWRmMGZmZGE4MDM0ZDc3N2ZiNiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIl0sInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiUGhvbmUiOnsicHJldmlldyI6eyJ0eXBlIjowLCJmaWVsZHMiOlsicGhvbmVOdW1iZXIiXX0sImNhdGVnb3J5IjoiaWRlbnRpdHkiLCJkYXRhIjp7InBob25lTnVtYmVyIjoiKzU0MjQ5NDYwMzI4NiJ9fX19LCJpc3MiOjM4NjU5NDc5NX0.K2LmVdt8xWPckdvHcHcas5NZ8THB-hdk5Dfo61OBASQ';
 
-test('Validate OK', async () => {
+test('validate OK', async () => {
   const result = await validateCredential(mobilePhone.v1, phoneJwt);
   expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
+  expect(result.errors).toBeNull();
 });
 
-test('Validate iat field FAIL', async () => {
+test('validate iat field FAIL', async () => {
   const result = await validateCredential(mobilePhone.v1, phoneIatFieldFail);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -28,7 +28,7 @@ test('Validate iat field FAIL', async () => {
   expect(result.errors[0].message).toBe('should be integer');
 });
 
-test('Validate sub field FAIL', async () => {
+test('validate sub field FAIL', async () => {
   const result = await validateCredential(mobilePhone.v1, phoneSubFieldFail);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -38,7 +38,7 @@ test('Validate sub field FAIL', async () => {
   expect(result.errors[0].message).toBe('should be string');
 });
 
-test('Validate vc.credentialSubject.Phone.preview.type field FAIL', async () => {
+test('validate vc.credentialSubject.Phone.preview.type field FAIL', async () => {
   const result = await validateCredential(
     mobilePhone.v1,
     phoneJwtTypeFieldFail,
@@ -55,7 +55,7 @@ test('Validate vc.credentialSubject.Phone.preview.type field FAIL', async () => 
   expect(result.errors[0].message).toBe('should be integer');
 });
 
-test('Validate iss field FAIL', async () => {
+test('validate iss field FAIL', async () => {
   const result = await validateCredential(mobilePhone.v1, phoneIssFieldFail);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');

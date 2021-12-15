@@ -1,9 +1,9 @@
+import { livingPlace } from '../src/schemas/livingPlace';
+
 const { createSemicolonClassElement } = require('typescript');
 const jwt = require('jsonwebtoken');
 const { jwtDecode } = require('jwt-decode');
 const { validateCredential } = require('../src/validator');
-
-import { livingPlace } from '../src/schemas/livingPlace';
 
 const valid = {
   iat: 123456,
@@ -57,10 +57,10 @@ const valid = {
 
 const validJWT = jwt.sign(valid, 'livingPlaceKey');
 
-test('Validate ok', async () => {
+test('validate ok', async () => {
   const result = await validateCredential(livingPlace.v2, validJWT);
   expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
+  expect(result.errors).toBeNull();
 });
 
 // INVALID SUB
@@ -117,7 +117,7 @@ const invalidSub = {
 
 const invalidSubJWT = jwt.sign(invalidSub, 'livingPlaceKey');
 
-test('Validate sub field FAIL', async () => {
+test('validate sub field FAIL', async () => {
   const result = await validateCredential(livingPlace.v2, invalidSubJWT);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -181,7 +181,7 @@ const invalidIss = {
 
 const invalidIssJWT = jwt.sign(invalidIss, 'livingPlaceKey');
 
-test('Validate iss field FAIL', async () => {
+test('validate iss field FAIL', async () => {
   const result = await validateCredential(livingPlace.v2, invalidIssJWT);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -245,7 +245,7 @@ const invalidPreviewType = {
 
 const invalidPreviewTypeJWT = jwt.sign(invalidPreviewType, 'livingPlaceKey');
 
-test(`Validate .vc.credentialSubject.Vivienda.preview.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject.Vivienda.preview.type field FAIL`, async () => {
   const result = await validateCredential(
     livingPlace.v2,
     invalidPreviewTypeJWT,
@@ -316,7 +316,7 @@ const invalidDataType = {
 
 const invalidDataTypeJWT = jwt.sign(invalidDataType, 'livingPlaceKey');
 
-test(`Validate .vc.credentialSubject.Vivienda.data.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject.Vivienda.data.type field FAIL`, async () => {
   const result = await validateCredential(livingPlace.v2, invalidDataTypeJWT);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -382,7 +382,7 @@ const invalidCategory = {
 
 const invalidCategoryJWT = jwt.sign(invalidCategory, 'livingPlaceKey');
 
-test(`Validate .vc.credentialSubject.Vivienda.category.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject.Vivienda.category.type field FAIL`, async () => {
   const result = await validateCredential(livingPlace.v2, invalidCategoryJWT);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');

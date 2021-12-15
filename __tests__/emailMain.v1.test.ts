@@ -14,73 +14,81 @@ const emailJwtTypeFieldDataFail =
 const emailIssFieldFail =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTUzNDY1NDksInN1YiI6ImRpZDpldGhyOjB4M2JjNzhmYmYyYjE0MTk1Zjg5NzFkNmMyNTUxMDkzZTUyYzg3OWI4YiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIl0sInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiRW1haWwiOnsicHJldmlldyI6eyJ0eXBlIjowLCJmaWVsZHMiOlsiZW1haWwiXX0sImNhdGVnb3J5IjoiaWRlbnRpdHkiLCJkYXRhIjp7ImVtYWlsIjoiYXhlbGJhdTI0QGdtYWlsLmNvbSJ9fX19LCJpc3MiOjUuMTA5MzcwMTUxNTg1NDFlKzIxfQ.9b6YlhXE4SaiuLMU_4lAntBYPFoMtHzSJU74Fn6bMK8';
 
-test('Validate ok', async () => {
-  const result = await validateCredential(emailMain.v1, emailJwt);
-  expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
-});
+describe('__tests__/credentiaList.test.ts', () => {
+  it('validate ok', async () => {
+    expect.assertions(2);
+    const result = await validateCredential(emailMain.v1, emailJwt);
+    expect(result.status).toBe(true);
+    expect(result.errors).toBeNull();
+  });
 
-test('Validate iat field FAIL', async () => {
-  const result = await validateCredential(emailMain.v1, emailIatFieldFail);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe('.iat');
-  expect(result.errors[0].schemaPath).toBe('#/properties/iat/type');
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].params.type).toBe('integer');
-  expect(result.errors[0].message).toBe('should be integer');
-});
+  it('validate iat field FAIL', async () => {
+    expect.assertions(7);
+    const result = await validateCredential(emailMain.v1, emailIatFieldFail);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.iat');
+    expect(result.errors[0].schemaPath).toBe('#/properties/iat/type');
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].params.type).toBe('integer');
+    expect(result.errors[0].message).toBe('should be integer');
+  });
 
-test('Validate sub field FAIL', async () => {
-  const result = await validateCredential(emailMain.v1, emailSubFieldFail);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe('.sub');
-  expect(result.errors[0].schemaPath).toBe('#/properties/sub/type');
-  expect(result.errors[0].params.type).toBe('string');
-  expect(result.errors[0].message).toBe('should be string');
-});
+  it('validate sub field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(emailMain.v1, emailSubFieldFail);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.sub');
+    expect(result.errors[0].schemaPath).toBe('#/properties/sub/type');
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
 
-test('Validate vc.credentialSubject.Email.preview.type field FAIL', async () => {
-  const result = await validateCredential(
-    emailMain.v1,
-    emailJwtTypeFieldPreviewFail,
-  );
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe(
-    '.vc.credentialSubject.Email.preview.type',
-  );
-  expect(result.errors[0].schemaPath).toBe(
-    '#/properties/vc/properties/credentialSubject/properties/Email/properties/preview/properties/type/type',
-  );
-  expect(result.errors[0].params.type).toBe('integer');
-  expect(result.errors[0].message).toBe('should be integer');
-});
+  it('validate vc.credentialSubject.Email.preview.type field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(
+      emailMain.v1,
+      emailJwtTypeFieldPreviewFail,
+    );
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe(
+      '.vc.credentialSubject.Email.preview.type',
+    );
+    expect(result.errors[0].schemaPath).toBe(
+      '#/properties/vc/properties/credentialSubject/properties/Email/properties/preview/properties/type/type',
+    );
+    expect(result.errors[0].params.type).toBe('integer');
+    expect(result.errors[0].message).toBe('should be integer');
+  });
 
-test('Validate vc.credentialSubject.Email.data.email field FAIL', async () => {
-  const result = await validateCredential(
-    emailMain.v1,
-    emailJwtTypeFieldDataFail,
-  );
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe(
-    '.vc.credentialSubject.Email.data.email',
-  );
-  expect(result.errors[0].schemaPath).toBe(
-    '#/properties/vc/properties/credentialSubject/properties/Email/properties/data/properties/email/type',
-  );
-  expect(result.errors[0].params.type).toBe('string');
-  expect(result.errors[0].message).toBe('should be string');
-});
+  it('validate vc.credentialSubject.Email.data.email field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(
+      emailMain.v1,
+      emailJwtTypeFieldDataFail,
+    );
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe(
+      '.vc.credentialSubject.Email.data.email',
+    );
+    expect(result.errors[0].schemaPath).toBe(
+      '#/properties/vc/properties/credentialSubject/properties/Email/properties/data/properties/email/type',
+    );
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
 
-test('Validate sub field FAIL', async () => {
-  const result = await validateCredential(emailMain.v1, emailIssFieldFail);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe('.iss');
-  expect(result.errors[0].schemaPath).toBe('#/properties/iss/type');
-  expect(result.errors[0].params.type).toBe('string');
-  expect(result.errors[0].message).toBe('should be string');
+  it('validate iss field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(emailMain.v1, emailIssFieldFail);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.iss');
+    expect(result.errors[0].schemaPath).toBe('#/properties/iss/type');
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
 });

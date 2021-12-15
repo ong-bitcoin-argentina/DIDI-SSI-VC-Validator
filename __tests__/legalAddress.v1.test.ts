@@ -8,13 +8,13 @@ const invalidIat =
 const invalidSub =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTUzNDY1NDksInN1YiI6My43ODE0MTk1ODk3MTU1MTA3ZSsyMSwidmMiOnsiQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiXSwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCJdLCJjcmVkZW50aWFsU3ViamVjdCI6eyJEb21pY2lsaW8gTGVnYWwiOnsicHJldmlldyI6eyJmaWVsZHMiOlsic3RyZWV0QWRkcmVzcyIsIm51bWJlclN0cmVldCIsInppcENvZGUiLCJjaXR5IiwicHJvdmluY2UiLCJjb3VudHJ5Il0sInR5cGUiOjF9LCJjYXRlZ29yeSI6ImlkZW50aXR5IiwiZGF0YSI6eyJzdHJlZXRBZGRyZXNzIjoiQVYuIERFTCBMSUJFUlRBRE9SIiwibnVtYmVyU3RyZWV0IjoiNDczMCIsImZsb29yIjoiOCIsImRlcGFydG1lbnQiOiJCIiwiemlwQ29kZSI6IjE0MjYiLCJjaXR5IjoiQkVMR1JBTk8iLCJtdW5pY2lwYWxpdHkiOiJDSVVEQUQgREUgQlVFTk9TIEFJUkVTIiwicHJvdmluY2UiOiJDSVVEQUQgREUgQlVFTk9TIEFJUkVTIiwiY291bnRyeSI6IkFSR0VOVElOQSJ9fX19LCJpc3MiOiJkaWQ6ZXRocjoweDUxMDllMzcwMTVjOTE1Y2EyZmQ1ODVhNDEwNWNmNTRlYWJjYTE3ZjgifQ.LtHsEIlZyplDDYHl__byd6Cb3siVIhZf_Svema7CsDI';
 
-test('Validate OK', async () => {
+test('validate OK', async () => {
   const result = await validateCredential(legalAddress, validJwt);
   expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
+  expect(result.errors).toBeNull();
 });
 
-test('Validate iat field FAIL', async () => {
+test('validate iat field FAIL', async () => {
   const result = await validateCredential(legalAddress.v1, invalidIat);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -25,7 +25,7 @@ test('Validate iat field FAIL', async () => {
   expect(result.errors[0].message).toBe('should be integer');
 });
 
-test('Validate sub field FAIL', async () => {
+test('validate sub field FAIL', async () => {
   const result = await validateCredential(legalAddress.v1, invalidSub);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');

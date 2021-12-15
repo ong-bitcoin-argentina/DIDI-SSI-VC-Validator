@@ -15,13 +15,13 @@ const invalidDataField =
 const invalidIss =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTUzNDY1NDksInN1YiI6ImRpZDpldGhyOjB4M2JjNzhmYmYyYjE0MTk1Zjg5NzFkNmMyNTUxMDkzZTUyYzg3OWI4YiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIl0sInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiRG9taWNpbGlvIExlZ2FsIjp7InByZXZpZXciOnsiZmllbGRzIjpbInN0cmVldEFkZHJlc3MiLCJudW1iZXJTdHJlZXQiLCJ6aXBDb2RlIiwiY2l0eSIsInByb3ZpbmNlIiwiY291bnRyeSJdLCJ0eXBlIjoxfSwiY2F0ZWdvcnkiOiJpZGVudGl0eSIsImRhdGEiOnsic3RyZWV0QWRkcmVzcyI6IkFWLiBERUwgTElCRVJUQURPUiIsIm51bWJlclN0cmVldCI6IjQ3MzAiLCJmbG9vciI6IjgiLCJkZXBhcnRtZW50IjoiQiIsInppcENvZGUiOiIxNDI2IiwiY2l0eSI6IkJFTEdSQU5PIiwibXVuaWNpcGFsaXR5IjoiQ0lVREFEIERFIEJVRU5PUyBBSVJFUyIsInByb3ZpbmNlIjoiQ0lVREFEIERFIEJVRU5PUyBBSVJFUyIsImNvdW50cnkiOiJBUkdFTlRJTkEifX19fSwiaXNzIjo1fQ.AoCmjyuYeR3Ep9W_UsILsism6KWckmDbYTDX8QOUEGM';
 
-test('Validate ok', async () => {
+test('validate ok', async () => {
   const result = await validateCredential(legalAddress.v2, validJwt);
   expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
+  expect(result.errors).toBeNull();
 });
 
-test('Validate iat field FAIL', async () => {
+test('validate iat field FAIL', async () => {
   const result = await validateCredential(legalAddress.v2, invalidIat);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -32,7 +32,7 @@ test('Validate iat field FAIL', async () => {
   expect(result.errors[0].message).toBe('should be integer');
 });
 
-test('Validate sub field FAIL', async () => {
+test('validate sub field FAIL', async () => {
   const result = await validateCredential(legalAddress.v2, invalidSub);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -42,7 +42,7 @@ test('Validate sub field FAIL', async () => {
   expect(result.errors[0].message).toBe('should be string');
 });
 
-test(`Validate .vc.credentialSubject['Domicilio Legal'].preview.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject['Domicilio Legal'].preview.type field FAIL`, async () => {
   const result = await validateCredential(legalAddress.v2, invalidPreviewField);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -56,7 +56,7 @@ test(`Validate .vc.credentialSubject['Domicilio Legal'].preview.type field FAIL`
   expect(result.errors[0].message).toBe('should be integer');
 });
 
-test(`Validate .vc.credentialSubject['Domicilio Legal'].data.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject['Domicilio Legal'].data.type field FAIL`, async () => {
   const result = await validateCredential(legalAddress.v2, invalidDataField);
 
   expect(result.status).toBe(false);
@@ -71,7 +71,7 @@ test(`Validate .vc.credentialSubject['Domicilio Legal'].data.type field FAIL`, a
   expect(result.errors[0].message).toBe('should be string');
 });
 
-test('Validate sub field FAIL', async () => {
+test('validate sub field FAIL', async () => {
   const result = await validateCredential(legalAddress.v2, invalidIss);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');

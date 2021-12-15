@@ -1,10 +1,10 @@
+import { semillaSembFamiliar } from '../src/schemas/benefit';
+
 const { createSemicolonClassElement } = require('typescript');
 
 const jwt = require('jsonwebtoken');
 const { jwtDecode } = require('jwt-decode');
 const { validateCredential } = require('../src/validator');
-
-import { semillaSembFamiliar } from '../src/schemas/benefit';
 
 const valid = {
   iat: 123456,
@@ -40,10 +40,10 @@ const valid = {
 
 const validJWT = jwt.sign(valid, 'semillaSembFamiliarKey');
 
-test('Validate ok', async () => {
+test('validate ok', async () => {
   const result = await validateCredential(semillaSembFamiliar.v1, validJWT);
   expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
+  expect(result.errors).toBeNull();
 });
 
 // INVALID SUB
@@ -83,7 +83,7 @@ const invalidSub = {
 
 const InvalidSubJWT = jwt.sign(invalidSub, 'semillaSembFamiliarKey');
 
-test('Validate sub field FAIL', async () => {
+test('validate sub field FAIL', async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
     InvalidSubJWT,
@@ -133,7 +133,7 @@ const invalidIss = {
 
 const InvalidIssJWT = jwt.sign(invalidIss, 'semillaSembFamiliarKey');
 
-test('Validate iss field FAIL', async () => {
+test('validate iss field FAIL', async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
     InvalidIssJWT,
@@ -184,7 +184,7 @@ const invalidPreviewJWT = jwt.sign(
   'semillaSembFamiliarKey',
 );
 
-test(`Validate .vc.credentialSubject['Sembrando - Familiar'].preview.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject['Sembrando - Familiar'].preview.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
     invalidPreviewJWT,
@@ -237,7 +237,7 @@ const invalidDataType = {
 
 const invalidDataTypeJWT = jwt.sign(invalidDataType, 'semillaSembFamiliarKey');
 
-test(`Validate .vc.credentialSubject['Sembrando - Familiar'].data.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject['Sembrando - Familiar'].data.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
     invalidDataTypeJWT,
@@ -289,7 +289,7 @@ const invalidCategory = {
 
 const invalidCategoryJWT = jwt.sign(invalidCategory, 'semillaSembFamiliarKey');
 
-test(`Validate .vc.credentialSubject['Sembrando - Familiar'].category.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject['Sembrando - Familiar'].category.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaSembFamiliar.v1,
     invalidCategoryJWT,

@@ -1,10 +1,10 @@
+import { semillaEmprendimiento } from '../src/schemas/work';
+
 const { createSemicolonClassElement } = require('typescript');
 
 const jwt = require('jsonwebtoken');
 const { jwtDecode } = require('jwt-decode');
 const { validateCredential } = require('../src/validator');
-
-import { semillaEmprendimiento } from '../src/schemas/work';
 
 const valid = {
   iat: 123456,
@@ -46,10 +46,10 @@ const valid = {
 
 const validJWT = jwt.sign(valid, 'emprendimientoKey');
 
-test('Validate ok', async () => {
+test('validate ok', async () => {
   const result = await validateCredential(semillaEmprendimiento.v1, validJWT);
   expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
+  expect(result.errors).toBeNull();
 });
 
 // INVALID SUB
@@ -93,7 +93,7 @@ const invalidSub = {
 
 const invalidSubJWT = jwt.sign(invalidSub, 'emprendimientoKey');
 
-test('Validate sub field FAIL', async () => {
+test('validate sub field FAIL', async () => {
   const result = await validateCredential(
     semillaEmprendimiento.v1,
     invalidSubJWT,
@@ -146,7 +146,7 @@ const invalisIss = {
 };
 
 const invalidIssJWT = jwt.sign(invalisIss, 'emprendimientoKey');
-test('Validate iss field FAIL', async () => {
+test('validate iss field FAIL', async () => {
   const result = await validateCredential(
     semillaEmprendimiento.v1,
     invalidIssJWT,
@@ -200,7 +200,7 @@ const invalidPreviewType = {
 
 const invalidPreviewTypeJWT = jwt.sign(invalidPreviewType, 'emprendimientoKey');
 
-test(`Validate .vc.credentialSubject.Emprendimiento.preview.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject.Emprendimiento.preview.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaEmprendimiento.v1,
     invalidPreviewTypeJWT,
@@ -258,7 +258,7 @@ const invalidDataType = {
 
 const invalidDataTypeJWT = jwt.sign(invalidDataType, 'emprendimientoKey');
 
-test(`Validate .vc.credentialSubject.Emprendimiento.data.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject.Emprendimiento.data.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaEmprendimiento.v1,
     invalidDataTypeJWT,
@@ -316,7 +316,7 @@ const invalidCategory = {
 
 const invalidCategoryJWT = jwt.sign(invalidCategory, 'emprendimientoKey');
 
-test(`Validate .vc.credentialSubject.Emprendimiento.category.type field FAIL`, async () => {
+test(`validate .vc.credentialSubject.Emprendimiento.category.type field FAIL`, async () => {
   const result = await validateCredential(
     semillaEmprendimiento.v1,
     invalidCategoryJWT,

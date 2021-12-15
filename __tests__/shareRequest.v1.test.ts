@@ -1,10 +1,10 @@
+import { shareRequestSchema } from '../src/schemas/shareRequest';
+
 const { createSemicolonClassElement } = require('typescript');
 
 const jwt = require('jsonwebtoken');
 const { jwtDecode } = require('jwt-decode');
 const { validateCredential } = require('../src/validator');
-
-import { shareRequestSchema } from '../src/schemas/shareRequest';
 
 const valid = {
   iat: 33,
@@ -52,10 +52,10 @@ const valid = {
 
 const validJWT = jwt.sign(valid, 'sharedResquestKey');
 
-test('Validate ok', async () => {
+test('validate ok', async () => {
   const result = await validateCredential(shareRequestSchema.v1, validJWT);
   expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
+  expect(result.errors).toBeNull();
 });
 // INVALID SUB
 const invalidIss = {
@@ -95,7 +95,7 @@ const invalidIss = {
 
 const invalidIssJWT = jwt.sign(invalidIss, 'shareRequestKey');
 
-test('Validate iss field FAIL', async () => {
+test('validate iss field FAIL', async () => {
   const result = await validateCredential(shareRequestSchema.v1, invalidIssJWT);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -143,7 +143,7 @@ const invalidAud = {
 
 const invalidAudJWT = jwt.sign(invalidAud, 'shareRequestKey');
 
-test('Validate Aud field FAIL', async () => {
+test('validate Aud field FAIL', async () => {
   const result = await validateCredential(shareRequestSchema.v1, invalidAudJWT);
   expect(result.status).toBe(false);
   expect(result.errors[0].keyword).toBe('type');
@@ -191,7 +191,7 @@ const invalidType = {
 
 const invalidTypeJWT = jwt.sign(invalidType, 'shareRequestKey');
 
-test('Validate type field FAIL', async () => {
+test('validate type field FAIL', async () => {
   const result = await validateCredential(
     shareRequestSchema.v1,
     invalidTypeJWT,
@@ -242,7 +242,7 @@ const invalidCallback = {
 
 const invalidCallbackJWT = jwt.sign(invalidCallback, 'shareRequestKey');
 
-test('Validate Callback field FAIL', async () => {
+test('validate Callback field FAIL', async () => {
   const result = await validateCredential(
     shareRequestSchema.v1,
     invalidCallbackJWT,
@@ -294,7 +294,7 @@ const invalidDidType = {
 
 const invalidDidTypeJWT = jwt.sign(invalidDidType, 'shareRequestKey');
 
-test(`Validate .claims.verifiable.emailMain.iss.did.type field FAIL`, async () => {
+test(`validate .claims.verifiable.emailMain.iss.did.type field FAIL`, async () => {
   const result = await validateCredential(
     shareRequestSchema.v1,
     invalidDidTypeJWT,
@@ -348,7 +348,7 @@ const invalidUrlType = {
 
 const invalidUrlTypeJWT = jwt.sign(invalidUrlType, 'shareRequestKey');
 
-test(`Validate .claims.verifiable.emailMain.iss.url.type field FAIL`, async () => {
+test(`validate .claims.verifiable.emailMain.iss.url.type field FAIL`, async () => {
   const result = await validateCredential(
     shareRequestSchema.v1,
     invalidUrlTypeJWT,
@@ -406,7 +406,7 @@ const invalidVerifiableDataTypeJWT = jwt.sign(
   'shareRequestKey',
 );
 
-test(`Validate .claims.verifiable.emailMain.reason.type field FAIL`, async () => {
+test(`validate .claims.verifiable.emailMain.reason.type field FAIL`, async () => {
   const result = await validateCredential(
     shareRequestSchema.v1,
     invalidVerifiableDataTypeJWT,
