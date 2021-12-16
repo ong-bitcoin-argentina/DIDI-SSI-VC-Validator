@@ -1,4 +1,4 @@
-import { validateCredential } from '../src';
+import { validateCredential } from '../src/validator';
 import { emailMain } from '../src/schemas/identity';
 
 const emailJwt =
