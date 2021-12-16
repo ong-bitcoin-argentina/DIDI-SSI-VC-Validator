@@ -5,14 +5,14 @@ describe('__tests__/credentiaList.test.ts', () => {
     expect.assertions(2);
     const types: string[] = getTypes();
     expect(types).toBeTruthy();
-    expect(types).toHaveLength(10);
+    expect(types).toHaveLength(12);
   });
 
   it('getCategories', async () => {
     expect.assertions(2);
     const categories: string[] = getCategories();
     expect(categories).toBeTruthy();
-    expect(categories).toHaveLength(3);
+    expect(categories).toHaveLength(5);
   });
 
   it('getVersions', async () => {

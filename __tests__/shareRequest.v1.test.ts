@@ -1,4 +1,4 @@
-import { shareRequestSchema } from '../src/schemas/shareRequest';
+import { shareRequestSchema } from '../src/messages';
 
 const jwt = require('jsonwebtoken');
 const { validateCredential } = require('../src/validator');

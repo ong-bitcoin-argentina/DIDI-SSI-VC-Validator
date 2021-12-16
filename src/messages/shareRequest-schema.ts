@@ -1,4 +1,4 @@
-import { getTypes } from '../../credentialList';
+import { getTypes } from '../credentialList';
 
 const types = getTypes();
 
