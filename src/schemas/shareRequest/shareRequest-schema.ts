@@ -1,6 +1,8 @@
 import { getTypes } from '../../credentialList';
 
-const verifiableProperties = getTypes().reduce((_acc: any, valor: string) => {
+const types = getTypes();
+
+const verifiableProperties = types.reduce((_acc: any, valor: string) => {
   // eslint-disable-next-line no-param-reassign
   _acc[valor] = {
     type: 'object',
