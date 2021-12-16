@@ -1,4 +1,4 @@
-import { validateCredential } from '../src';
+import { validateCredential } from '../src/validator';
 import { legalAddress } from '../src/schemas/identity';
 
 const validJwt =
@@ -15,68 +15,78 @@ const invalidDataField =
 const invalidIss =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTUzNDY1NDksInN1YiI6ImRpZDpldGhyOjB4M2JjNzhmYmYyYjE0MTk1Zjg5NzFkNmMyNTUxMDkzZTUyYzg3OWI4YiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIl0sInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiRG9taWNpbGlvIExlZ2FsIjp7InByZXZpZXciOnsiZmllbGRzIjpbInN0cmVldEFkZHJlc3MiLCJudW1iZXJTdHJlZXQiLCJ6aXBDb2RlIiwiY2l0eSIsInByb3ZpbmNlIiwiY291bnRyeSJdLCJ0eXBlIjoxfSwiY2F0ZWdvcnkiOiJpZGVudGl0eSIsImRhdGEiOnsic3RyZWV0QWRkcmVzcyI6IkFWLiBERUwgTElCRVJUQURPUiIsIm51bWJlclN0cmVldCI6IjQ3MzAiLCJmbG9vciI6IjgiLCJkZXBhcnRtZW50IjoiQiIsInppcENvZGUiOiIxNDI2IiwiY2l0eSI6IkJFTEdSQU5PIiwibXVuaWNpcGFsaXR5IjoiQ0lVREFEIERFIEJVRU5PUyBBSVJFUyIsInByb3ZpbmNlIjoiQ0lVREFEIERFIEJVRU5PUyBBSVJFUyIsImNvdW50cnkiOiJBUkdFTlRJTkEifX19fSwiaXNzIjo1fQ.AoCmjyuYeR3Ep9W_UsILsism6KWckmDbYTDX8QOUEGM';
 
-test('Validate ok', async () => {
-  const result = await validateCredential(legalAddress.v2, validJwt);
-  expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
-});
+describe('legalAddress.v2.test', () => {
+  it('validate ok', async () => {
+    expect.assertions(2);
+    const result = await validateCredential(legalAddress.v2, validJwt);
+    expect(result.status).toBe(true);
+    expect(result.errors).toBeNull();
+  });
 
-test('Validate iat field FAIL', async () => {
-  const result = await validateCredential(legalAddress.v2, invalidIat);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe('.iat');
-  expect(result.errors[0].schemaPath).toBe('#/properties/iat/type');
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].params.type).toBe('integer');
-  expect(result.errors[0].message).toBe('should be integer');
-});
+  it('validate iat field FAIL', async () => {
+    expect.assertions(7);
+    const result = await validateCredential(legalAddress.v2, invalidIat);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.iat');
+    expect(result.errors[0].schemaPath).toBe('#/properties/iat/type');
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].params.type).toBe('integer');
+    expect(result.errors[0].message).toBe('should be integer');
+  });
 
-test('Validate sub field FAIL', async () => {
-  const result = await validateCredential(legalAddress.v2, invalidSub);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe('.sub');
-  expect(result.errors[0].schemaPath).toBe('#/properties/sub/type');
-  expect(result.errors[0].params.type).toBe('string');
-  expect(result.errors[0].message).toBe('should be string');
-});
+  it(`validate .vc.credentialSubject['Domicilio Legal'].preview.type field FAIL`, async () => {
+    expect.assertions(6);
+    const result = await validateCredential(
+      legalAddress.v2,
+      invalidPreviewField,
+    );
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe(
+      `.vc.credentialSubject['Domicilio Legal'].preview.type`,
+    );
+    expect(result.errors[0].schemaPath).toBe(
+      '#/properties/vc/properties/credentialSubject/properties/Domicilio%20Legal/properties/preview/properties/type/type',
+    );
+    expect(result.errors[0].params.type).toBe('integer');
+    expect(result.errors[0].message).toBe('should be integer');
+  });
 
-test(`Validate .vc.credentialSubject['Domicilio Legal'].preview.type field FAIL`, async () => {
-  const result = await validateCredential(legalAddress.v2, invalidPreviewField);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Domicilio Legal'].preview.type`,
-  );
-  expect(result.errors[0].schemaPath).toBe(
-    '#/properties/vc/properties/credentialSubject/properties/Domicilio%20Legal/properties/preview/properties/type/type',
-  );
-  expect(result.errors[0].params.type).toBe('integer');
-  expect(result.errors[0].message).toBe('should be integer');
-});
+  it(`validate .vc.credentialSubject['Domicilio Legal'].data.type field FAIL`, async () => {
+    expect.assertions(6);
+    const result = await validateCredential(legalAddress.v2, invalidDataField);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe(
+      `.vc.credentialSubject['Domicilio Legal'].data.country`,
+    );
+    expect(result.errors[0].schemaPath).toBe(
+      '#/properties/vc/properties/credentialSubject/properties/Domicilio%20Legal/properties/data/properties/country/type',
+    );
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
 
-test(`Validate .vc.credentialSubject['Domicilio Legal'].data.type field FAIL`, async () => {
-  const result = await validateCredential(legalAddress.v2, invalidDataField);
+  it('validate iss field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(legalAddress.v2, invalidIss);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.iss');
+    expect(result.errors[0].schemaPath).toBe('#/properties/iss/type');
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
 
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe(
-    `.vc.credentialSubject['Domicilio Legal'].data.country`,
-  );
-  expect(result.errors[0].schemaPath).toBe(
-    '#/properties/vc/properties/credentialSubject/properties/Domicilio%20Legal/properties/data/properties/country/type',
-  );
-  expect(result.errors[0].params.type).toBe('string');
-  expect(result.errors[0].message).toBe('should be string');
-});
-
-test('Validate sub field FAIL', async () => {
-  const result = await validateCredential(legalAddress.v2, invalidIss);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe('.iss');
-  expect(result.errors[0].schemaPath).toBe('#/properties/iss/type');
-  expect(result.errors[0].params.type).toBe('string');
-  expect(result.errors[0].message).toBe('should be string');
+  it('validate sub field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(legalAddress.v2, invalidSub);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.sub');
+    expect(result.errors[0].schemaPath).toBe('#/properties/sub/type');
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
 });

@@ -1,4 +1,4 @@
-import { validateCredential } from '../src';
+import { validateCredential } from '../src/validator';
 import { mobilePhone } from '../src/schemas/identity';
 
 const phoneJwt =
@@ -12,55 +12,62 @@ const phoneSubFieldFail =
 const phoneIssFieldFail =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzA0NDU2OTIsInN1YiI6ImRpZDpldGhyOjB4ODRiMmYxYzM0MzE3NmQyNjRhMThlOWRmMGZmZGE4MDM0ZDc3N2ZiNiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIl0sInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiUGhvbmUiOnsicHJldmlldyI6eyJ0eXBlIjowLCJmaWVsZHMiOlsicGhvbmVOdW1iZXIiXX0sImNhdGVnb3J5IjoiaWRlbnRpdHkiLCJkYXRhIjp7InBob25lTnVtYmVyIjoiKzU0MjQ5NDYwMzI4NiJ9fX19LCJpc3MiOjM4NjU5NDc5NX0.K2LmVdt8xWPckdvHcHcas5NZ8THB-hdk5Dfo61OBASQ';
 
-test('Validate OK', async () => {
-  const result = await validateCredential(mobilePhone.v1, phoneJwt);
-  expect(result.status).toBe(true);
-  expect(result.errors).toBe(null);
-});
+describe('phone.v1.test', () => {
+  it('validate OK', async () => {
+    expect.assertions(2);
+    const result = await validateCredential(mobilePhone.v1, phoneJwt);
+    expect(result.status).toBe(true);
+    expect(result.errors).toBeNull();
+  });
 
-test('Validate iat field FAIL', async () => {
-  const result = await validateCredential(mobilePhone.v1, phoneIatFieldFail);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe('.iat');
-  expect(result.errors[0].schemaPath).toBe('#/properties/iat/type');
-  expect(result.errors[0].params.type).toBe('integer');
-  expect(result.errors[0].message).toBe('should be integer');
-});
+  it('validate iat field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(mobilePhone.v1, phoneIatFieldFail);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.iat');
+    expect(result.errors[0].schemaPath).toBe('#/properties/iat/type');
+    expect(result.errors[0].params.type).toBe('integer');
+    expect(result.errors[0].message).toBe('should be integer');
+  });
 
-test('Validate sub field FAIL', async () => {
-  const result = await validateCredential(mobilePhone.v1, phoneSubFieldFail);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe('.sub');
-  expect(result.errors[0].schemaPath).toBe('#/properties/sub/type');
-  expect(result.errors[0].params.type).toBe('string');
-  expect(result.errors[0].message).toBe('should be string');
-});
+  it('validate sub field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(mobilePhone.v1, phoneSubFieldFail);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.sub');
+    expect(result.errors[0].schemaPath).toBe('#/properties/sub/type');
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
 
-test('Validate vc.credentialSubject.Phone.preview.type field FAIL', async () => {
-  const result = await validateCredential(
-    mobilePhone.v1,
-    phoneJwtTypeFieldFail,
-  );
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe(
-    '.vc.credentialSubject.Phone.preview.type',
-  );
-  expect(result.errors[0].schemaPath).toBe(
-    '#/properties/vc/properties/credentialSubject/properties/Phone/properties/preview/properties/type/type',
-  );
-  expect(result.errors[0].params.type).toBe('integer');
-  expect(result.errors[0].message).toBe('should be integer');
-});
+  it('validate vc.credentialSubject.Phone.preview.type field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(
+      mobilePhone.v1,
+      phoneJwtTypeFieldFail,
+    );
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe(
+      '.vc.credentialSubject.Phone.preview.type',
+    );
+    expect(result.errors[0].schemaPath).toBe(
+      '#/properties/vc/properties/credentialSubject/properties/Phone/properties/preview/properties/type/type',
+    );
+    expect(result.errors[0].params.type).toBe('integer');
+    expect(result.errors[0].message).toBe('should be integer');
+  });
 
-test('Validate iss field FAIL', async () => {
-  const result = await validateCredential(mobilePhone.v1, phoneIssFieldFail);
-  expect(result.status).toBe(false);
-  expect(result.errors[0].keyword).toBe('type');
-  expect(result.errors[0].dataPath).toBe('.iss');
-  expect(result.errors[0].schemaPath).toBe('#/properties/iss/type');
-  expect(result.errors[0].params.type).toBe('string');
-  expect(result.errors[0].message).toBe('should be string');
+  it('validate iss field FAIL', async () => {
+    expect.assertions(6);
+    const result = await validateCredential(mobilePhone.v1, phoneIssFieldFail);
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.iss');
+    expect(result.errors[0].schemaPath).toBe('#/properties/iss/type');
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
 });

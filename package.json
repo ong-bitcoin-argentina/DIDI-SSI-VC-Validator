@@ -4,9 +4,13 @@
   "description": "Verifiable Credentials validator",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest",
+    "build": "tsc",
     "lint": "eslint **/*.ts",
-    "lint:fix": "eslint **/*.ts --fix"
+    "lint:fix": "eslint **/*.ts --fix",
+    "npm:publish": "npm publish --access public",
+    "prenpm:publish": "npm run lint && npm run build",
+    "test": "jest",
+    "typeCheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -24,14 +28,16 @@
   },
   "homepage": "https://github.com/ong-bitcoin-argentina/DIDI-SSI-VC-Validator#readme",
   "devDependencies": {
+    "@jest/globals": "^27.4.4",
     "@tsconfig/node14": "^1.0.1",
-    "@types/jest": "^27.0.1",
+    "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
-    "eslint": "^8.4.0",
+    "eslint": "^8.4.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.2.0",
     "prettier": "^2.5.1",

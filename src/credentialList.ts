@@ -14,12 +14,12 @@ export function getCategories(): string[] {
 }
 
 export function getVersions(category: string, type: string): string[] {
-  // @ts-ignore
+  // @ts-expect-error Index are string like
   if (!schemas[category] || !schemas[category][type]) {
     throw new Error('#vcValidator-getVersions-categoryAndTypeNotFound');
   }
 
-  // @ts-ignore
+  // @ts-expect-error Index are string like
   const versions: string[] = Object.keys(schemas[category][type]);
   return versions;
 }
