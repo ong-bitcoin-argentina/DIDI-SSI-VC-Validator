@@ -10,7 +10,7 @@ const verifiableProperties = types.reduce((_acc: any, valor: string) => {
       essential: {
         type: 'boolean',
       },
-      iss: {
+      issuers: {
         type: 'array',
         items: [
           {
@@ -31,7 +31,7 @@ const verifiableProperties = types.reduce((_acc: any, valor: string) => {
         type: 'string',
       },
     },
-    required: ['iss', 'reason'],
+    required: ['issuers', 'reason'],
   };
   return _acc;
 }, {});

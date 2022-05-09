@@ -11,7 +11,7 @@ const valid = {
     verifiable: {
       semillaSembFamiliar: {
         essential: true,
-        iss: [
+        issuers: [
           {
             did: 'did:web:idverifier.claims',
             url: 'https://idverifier.example',
@@ -22,7 +22,7 @@ const valid = {
 
       semillaSancorSalud: {
         essential: true,
-        iss: [
+        issuers: [
           {
             did: 'did:web:idverifier.claims',
             url: 'https://idverifier.example',
@@ -33,7 +33,7 @@ const valid = {
 
       mobilePhone: {
         essential: true,
-        iss: [
+        issuers: [
           {
             did: 'did:web:idverifier.claims',
             url: 'https://idverifier.example',
@@ -64,7 +64,7 @@ describe('shareRequest.v1.test', () => {
     claims: {
       verifiable: {
         emailMain: {
-          iss: [
+          issuers: [
             {
               did: 'did:web:uport.claims',
               url: 'https://uport.claims/email',
@@ -78,7 +78,7 @@ describe('shareRequest.v1.test', () => {
         },
         nationalId: {
           essential: true,
-          iss: [
+          issuers: [
             {
               did: 'did:web:idverifier.claims',
               url: 'https://idverifier.example',
@@ -116,7 +116,7 @@ describe('shareRequest.v1.test', () => {
     claims: {
       verifiable: {
         emailMain: {
-          iss: [
+          issuers: [
             {
               did: 'did:web:uport.claims',
               url: 'https://uport.claims/email',
@@ -130,7 +130,7 @@ describe('shareRequest.v1.test', () => {
         },
         nationalId: {
           essential: true,
-          iss: [
+          issuers: [
             {
               did: 'did:web:idverifier.claims',
               url: 'https://idverifier.example',
@@ -168,7 +168,7 @@ describe('shareRequest.v1.test', () => {
     claims: {
       verifiable: {
         emailMain: {
-          iss: [
+          issuers: [
             {
               did: 'did:web:uport.claims',
               url: 'https://uport.claims/email',
@@ -182,7 +182,7 @@ describe('shareRequest.v1.test', () => {
         },
         nationalId: {
           essential: true,
-          iss: [
+          issuers: [
             {
               did: 'did:web:idverifier.claims',
               url: 'https://idverifier.example',
@@ -220,7 +220,7 @@ describe('shareRequest.v1.test', () => {
     claims: {
       verifiable: {
         emailMain: {
-          iss: [
+          issuers: [
             {
               did: 'did:web:uport.claims',
               url: 'https://uport.claims/email',
@@ -234,7 +234,7 @@ describe('shareRequest.v1.test', () => {
         },
         nationalId: {
           essential: true,
-          iss: [
+          issuers: [
             {
               did: 'did:web:idverifier.claims',
               url: 'https://idverifier.example',
@@ -273,7 +273,7 @@ describe('shareRequest.v1.test', () => {
     claims: {
       verifiable: {
         emailMain: {
-          iss: [
+          issuers: [
             {
               did: 3,
               url: 'https://uport.claims/email',
@@ -287,7 +287,7 @@ describe('shareRequest.v1.test', () => {
         },
         nationalId: {
           essential: true,
-          iss: [
+          issuers: [
             {
               did: 'did:web:idverifier.claims',
               url: 'https://idverifier.example',
@@ -312,10 +312,10 @@ describe('shareRequest.v1.test', () => {
     expect(result.status).toBe(false);
     expect(result.errors[0].keyword).toBe('type');
     expect(result.errors[0].dataPath).toBe(
-      '.claims.verifiable.emailMain.iss[0].did',
+      '.claims.verifiable.emailMain.issuers[0].did',
     );
     expect(result.errors[0].schemaPath).toBe(
-      '#/properties/claims/properties/verifiable/properties/emailMain/properties/iss/items/0/properties/did/type',
+      '#/properties/claims/properties/verifiable/properties/emailMain/properties/issuers/items/0/properties/did/type',
     );
     expect(result.errors[0].params.type).toBe('string');
     expect(result.errors[0].message).toBe('should be string');
@@ -329,7 +329,7 @@ describe('shareRequest.v1.test', () => {
     claims: {
       verifiable: {
         emailMain: {
-          iss: [
+          issuers: [
             {
               did: 'did:web:uport.claims',
               url: 7,
@@ -342,7 +342,7 @@ describe('shareRequest.v1.test', () => {
         },
         nationalId: {
           essential: true,
-          iss: [
+          issuers: [
             {
               did: 'did:web:idverifier.claims',
               url: 'https://idverifier.example',
@@ -367,10 +367,10 @@ describe('shareRequest.v1.test', () => {
     expect(result.status).toBe(false);
     expect(result.errors[0].keyword).toBe('type');
     expect(result.errors[0].dataPath).toBe(
-      '.claims.verifiable.emailMain.iss[0].url',
+      '.claims.verifiable.emailMain.issuers[0].url',
     );
     expect(result.errors[0].schemaPath).toBe(
-      '#/properties/claims/properties/verifiable/properties/emailMain/properties/iss/items/0/properties/url/type',
+      '#/properties/claims/properties/verifiable/properties/emailMain/properties/issuers/items/0/properties/url/type',
     );
     expect(result.errors[0].params.type).toBe('string');
     expect(result.errors[0].message).toBe('should be string');
@@ -384,7 +384,7 @@ describe('shareRequest.v1.test', () => {
     claims: {
       verifiable: {
         emailMain: {
-          iss: [
+          issuers: [
             {
               did: 'did:web:uport.claims',
               url: 'https://uport.claims/email',
@@ -398,7 +398,7 @@ describe('shareRequest.v1.test', () => {
         },
         nationalId: {
           essential: true,
-          iss: [
+          issuers: [
             {
               did: 'did:web:idverifier.claims',
               url: 'https://idverifier.example',
