@@ -26,3 +26,22 @@ export function validateCredential(
     errors: null,
   };
 }
+
+export function validateSchema(
+  schema: object,
+  body: object,
+): ValidateCredentialType {
+  const ajv = new Ajv();
+  const validate = ajv.compile(schema);
+  const valid = validate(body);
+  if (!valid) {
+    return {
+      status: false,
+      errors: validate.errors,
+    };
+  }
+  return {
+    status: true,
+    errors: null,
+  };
+}
