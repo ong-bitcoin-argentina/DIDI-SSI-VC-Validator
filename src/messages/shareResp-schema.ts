@@ -56,7 +56,7 @@ export const verifedClaims = {
     },
     claim: {
       type: 'object',
-      properties: verifiableProperties,,
+      properties: verifiableProperties,
     },
   },
   required: ['iss', 'sub', 'iat', 'claim'],
@@ -85,12 +85,14 @@ export const v1 = {
     },
     vc: {
       type: 'array',
-      items: [
-        {
-          type: 'object',
-          properties: verifedClaims,
-        },
-      ],
+      propierties: {
+        items: [
+          {
+            type: 'object',
+            properties: verifedClaims,
+          },
+        ],
+      },
     },
   },
   required: ['iss', 'type', 'aud', 'iat', 'exp'],

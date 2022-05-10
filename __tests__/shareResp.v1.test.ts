@@ -78,14 +78,8 @@ describe('shareResp.v1.test', () => {
   });
 
   // INVALID EXP
-  const invalidExp = {
-    iat: 33,
-    type: 'shareResp',
-    aud: 9,
-    iss: 'did:ethr:firmante',
-  };
-
-  const invalidExpJWT = jwt.sign(invalidExp, 'shareRespKey');
+  const invalidExpJWT =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjMzLCJ0eXBlIjoic2hhcmVSZXNwIiwiYXVkIjoiMHhhdWQiLCJpc3MiOiJkaWQ6ZXRocjpmaXJtYW50ZSIsImV4cCI6IjkiLCJyZXEiOiJyZXEiLCJ2YyI6W3siaWF0IjozMywidHlwZSI6InNoYXJlUmVzcCIsImF1ZCI6IjB4YXVkIiwiaXNzIjoiZGlkOmV0aHI6ZmlybWFudGUiLCJzdWIiOiJzdWIiLCJjbGFpbSI6eyJuYW1lIjoiQ2Fyb2wgQ3J5cHRlYXUifSwiZXhwIjo5fV19._kmVDiYPGS2uJpbl6eGgtm9JI58FqPnMjvGIYePJzmE';
 
   it('validate Exp field FAIL', async () => {
     expect.assertions(6);
@@ -120,14 +114,8 @@ describe('shareResp.v1.test', () => {
   });
 
   // INVALID IAT TYPE
-  const invalidIat = {
-    iat: '23',
-    type: 'shareResp',
-    aud: '0xaud',
-    iss: 2,
-  };
-
-  const invalidIatJWT = jwt.sign(invalidIat, 'shareRespKey');
+  const invalidIatJWT =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOiIzMyIsInR5cGUiOiJzaGFyZVJlc3AiLCJhdWQiOiIweGF1ZCIsImlzcyI6ImRpZDpldGhyOmZpcm1hbnRlIiwiZXhwIjo5LCJyZXEiOiJyZXEiLCJ2YyI6W3siaWF0IjozMywidHlwZSI6InNoYXJlUmVzcCIsImF1ZCI6IjB4YXVkIiwiaXNzIjoiZGlkOmV0aHI6ZmlybWFudGUiLCJzdWIiOiJzdWIiLCJjbGFpbSI6eyJuYW1lIjoiQ2Fyb2wgQ3J5cHRlYXUifSwiZXhwIjo5fV19.sOIc7GNR_9Dxcs2g8F_Rf7EsCWZaQtRK0ql9sQvOaM4';
 
   it('validate Iat field FAIL', async () => {
     expect.assertions(6);
@@ -142,11 +130,12 @@ describe('shareResp.v1.test', () => {
 
   // INVALID REQ TYPE
   const invalidReq = {
-    iat: '23',
+    iat: 33,
     type: 'shareResp',
-    req: 2,
     aud: '0xaud',
-    iss: 2,
+    iss: 'did:ethr:firmante',
+    exp: 9,
+    req: 3,
   };
 
   const invalidReqJWT = jwt.sign(invalidReq, 'shareRespKey');
@@ -164,11 +153,12 @@ describe('shareResp.v1.test', () => {
 
   // INVALID VC TYPE
   const invalidVc = {
-    iat: '23',
+    iat: 33,
     type: 'shareResp',
-    req: 2,
     aud: '0xaud',
-    iss: 2,
+    iss: 'did:ethr:firmante',
+    exp: 9,
+    req: 'req',
     vc: {},
   };
 
