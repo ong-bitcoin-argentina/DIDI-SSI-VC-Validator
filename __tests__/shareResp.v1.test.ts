@@ -174,4 +174,46 @@ describe('shareResp.v1.test', () => {
     expect(result.errors[0].params.type).toBe('array');
     expect(result.errors[0].message).toBe('should be array');
   });
+
+  const invalidVerifiableDataType = {
+    iat: 33,
+    type: 'shareResp',
+    aud: '0xaud',
+    iss: 'did:ethr:firmante',
+    exp: 9,
+    req: 'req',
+    vc: [
+      {
+        iat: 33,
+        type: 5,
+        aud: '0xaud',
+        iss: 'did:ethr:firmante',
+        sub: 'sub',
+        claim: {
+          name: 'Carol Crypteau',
+        },
+        exp: 9,
+      },
+    ],
+  };
+  const invalidVerifiableDataTypeJWT = jwt.sign(
+    invalidVerifiableDataType,
+    'shareRespKey',
+  );
+
+  it(`validate .vc[0].type field FAIL`, async () => {
+    expect.assertions(6);
+    const result = await validateCredential(
+      shareRespSchema.v1,
+      invalidVerifiableDataTypeJWT,
+    );
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.vc[0].type');
+    expect(result.errors[0].schemaPath).toBe(
+      '#/properties/vc/items/0/properties/type/type',
+    );
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
 });

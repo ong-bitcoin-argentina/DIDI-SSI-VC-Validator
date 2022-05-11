@@ -85,14 +85,7 @@ export const v1 = {
     },
     vc: {
       type: 'array',
-      propierties: {
-        items: [
-          {
-            type: 'object',
-            properties: verifedClaims,
-          },
-        ],
-      },
+      items: [verifedClaims],
     },
   },
   required: ['iss', 'type', 'aud', 'iat', 'exp'],
