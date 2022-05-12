@@ -19,6 +19,14 @@ const valid = {
       sub: 'sub',
       claim: {
         name: 'Carol Crypteau',
+        essential: true,
+        iss: [
+          {
+            did: 'did:web:idverifier.claims',
+            url: 'https://idverifier.example',
+          },
+        ],
+        reason: 'To legally be able to send you a text',
       },
       exp: 9,
     },
@@ -212,6 +220,54 @@ describe('shareResp.v1.test', () => {
     expect(result.errors[0].dataPath).toBe('.vc[0].type');
     expect(result.errors[0].schemaPath).toBe(
       '#/properties/vc/items/0/properties/type/type',
+    );
+    expect(result.errors[0].params.type).toBe('string');
+    expect(result.errors[0].message).toBe('should be string');
+  });
+
+  const invalidVcIssType = {
+    iat: 33,
+    type: 'shareResp',
+    aud: '0xaud',
+    iss: 'did:ethr:firmante',
+    exp: 9,
+    req: 'req',
+    vc: [
+      {
+        iat: 33,
+        type: 'shareResp',
+        aud: '0xaud',
+        iss: 'did:ethr:firmante',
+        sub: 'sub',
+        claim: {
+          emailMain: {
+            iss: [
+              {
+                did: 7,
+                url: 'url',
+              },
+            ],
+            reason: 8,
+          },
+        },
+        exp: 9,
+      },
+    ],
+  };
+  const invalidVcIssTypeJWT = jwt.sign(invalidVcIssType, 'shareRespKey');
+
+  it(`validate .vc[0].emailMain.iss[0].did field FAIL`, async () => {
+    expect.assertions(6);
+    const result = await validateCredential(
+      shareRespSchema.v1,
+      invalidVcIssTypeJWT,
+    );
+
+    expect(result.status).toBe(false);
+    expect(result.errors[0].keyword).toBe('type');
+    expect(result.errors[0].dataPath).toBe('.vc[0].claim.emailMain.iss[0].did');
+    expect(result.errors[0].schemaPath).toBe(
+      '#/properties/vc/items/0/properties/claim/properties/emailMain/properties/iss/items/0/properties/did/type',
     );
     expect(result.errors[0].params.type).toBe('string');
     expect(result.errors[0].message).toBe('should be string');
