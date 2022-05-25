@@ -1,5 +1,7 @@
 import * as schemas from './schemas';
 
+const { map } = require('./constants');
+
 export function getTypes(): string[] {
   let types: string[] = [];
   Object.values(schemas).forEach((category: object) => {
@@ -22,4 +24,17 @@ export function getVersions(category: string, type: string): string[] {
   // @ts-expect-error Index are string like
   const versions: string[] = Object.keys(schemas[category][type]);
   return versions;
+}
+
+export function getNames(): object {
+  return map.keys();
+}
+
+export function getSchemaByName(name: string): [object] {
+  return map.get(name);
+}
+
+export function getLastVersion(name: string): string {
+  const versions = Object.keys(getSchemaByName(name));
+  return versions[0];
 }
