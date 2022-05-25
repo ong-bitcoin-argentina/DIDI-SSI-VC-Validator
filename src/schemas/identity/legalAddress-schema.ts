@@ -55,44 +55,37 @@ export const v2 = {
                 data: {
                   type: 'object',
                   properties: {
-                    streetAddress: {
-                      propierties: {
-                        streetAddress: {
-                          type: 'string',
-                        },
-                        numberStreet: {
-                          type: 'string',
-                        },
-                      },
-                    },
-                    floor: {
+                    Domicilio: {
                       type: 'string',
                     },
-                    department: {
+                    Piso: {
                       type: 'string',
                     },
-                    zipCode: {
+                    Departamento: {
                       type: 'string',
                     },
-                    city: {
+                    'Código Postal': {
                       type: 'string',
                     },
-                    municipality: {
+                    'Ciudad/Barrio': {
                       type: 'string',
                     },
-                    province: {
+                    'Departamento/Municipalidad': {
                       type: 'string',
                     },
-                    country: {
+                    Provincia: {
+                      type: 'string',
+                    },
+                    País: {
                       type: 'string',
                     },
                   },
                   required: [
-                    'streetAddress',
-                    'zipCode',
-                    'city',
-                    'province',
-                    'country',
+                    'Domicilio',
+                    'Ciudad/Barrio',
+                    'Departamento/Municipalidad',
+                    'Provincia',
+                    'País',
                   ],
                 },
               },

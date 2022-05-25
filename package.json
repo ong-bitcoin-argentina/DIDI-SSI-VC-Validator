@@ -1,8 +1,11 @@
 {
   "name": "@proyecto-didi/vc-validator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Verifiable Credentials validator",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.js",
+  "source": "src/index",
+  "modules": "dist/index",
   "scripts": {
     "build": "tsc",
     "lint": "eslint **/*.ts",
@@ -10,7 +13,8 @@
     "npm:publish": "npm publish --access public",
     "prenpm:publish": "npm run lint && npm run build",
     "test": "jest",
-    "typeCheck": "tsc --noEmit"
+    "typeCheck": "tsc --noEmit",
+    "test:npm": "npm publish --access public --dry-run"
   },
   "repository": {
     "type": "git",

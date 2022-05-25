@@ -55,20 +55,25 @@ export const v1 = {
                 data: {
                   type: 'object',
                   properties: {
-                    dni: {
+                    'Numero de Identidad': {
                       type: 'string',
                     },
-                    names: {
+                    'Nombre(s)': {
                       type: 'string',
                     },
-                    lastNames: {
+                    'Apellido(s)': {
                       type: 'string',
                     },
-                    nationality: {
+                    Nacionalidad: {
                       type: 'string',
                     },
                   },
-                  required: ['dni', 'names', 'lastNames', 'nationality'],
+                  required: [
+                    'Numero de Identidad',
+                    'Nombre(s)',
+                    'Apellido(s)',
+                    'Nacionalidad',
+                  ],
                 },
               },
               required: ['preview', 'category', 'data'],
