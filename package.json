@@ -8,7 +8,7 @@
   "modules": "dist/index",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint **/*.ts",
+    "lint": "eslint \"{src,__tests__}/**/*.ts\"",
     "lint:fix": "eslint **/*.ts --fix",
     "npm:publish": "npm publish --access public",
     "prenpm:publish": "npm run lint && npm run build",
