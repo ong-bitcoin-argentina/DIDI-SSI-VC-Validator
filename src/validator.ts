@@ -38,9 +38,9 @@ export function validateMessageRes(jwt: string): ValidateCredentialType {
   if (res.status) {
     vc.forEach((value: any) => {
       const name = Object.keys(value.vc.credentialSubject);
-      const vc_schema = getSchemaByName(name[0]);
-      const vc_jwt = encode.sign(value, name[0]);
-      res = validateCredential(vc_schema, vc_jwt);
+      const vcScjema = getSchemaByName(name[0]);
+      const vcJwt = encode.sign(value, name[0]);
+      res = validateCredential(vcScjema, vcJwt);
     });
   }
   return res;

@@ -24,6 +24,19 @@ export const v1 = {
       items: [
         {
           type: 'object',
+          properties: {
+            '@context': {
+              type: 'array',
+              items: [
+                {
+                  type: 'string',
+                },
+              ],
+            },
+            credentialSubject: {
+              type: 'object',
+            },
+          },
         },
       ],
     },
