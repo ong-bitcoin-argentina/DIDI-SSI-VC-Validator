@@ -1,6 +1,6 @@
 import * as schemas from './schemas';
 
-const { schemasMap } = require('./constants');
+const { schemasByName } = require('./constants');
 
 export function getTypes(): string[] {
   let types: string[] = [];
@@ -27,11 +27,11 @@ export function getVersions(category: string, type: string): string[] {
 }
 
 export function getNames(): object {
-  return schemasMap.keys();
+  return schemasByName.keys();
 }
 
 export function getSchemaByName(name: string): [object] {
-  return schemasMap.get(name);
+  return schemasByName.get(name);
 }
 
 export function getLastVersion(name: string): string {
