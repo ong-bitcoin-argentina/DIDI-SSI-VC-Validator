@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import Ajv from 'ajv';
 import jwt_decode from 'jwt-decode';
-import encode from 'jsonwebtoken';
 import { getSchemaByName } from './credentialList';
 import { shareRespSchema } from './messages';
 
@@ -30,17 +29,33 @@ export function validateCredential(
   };
 }
 
+export function validateSchema(
+  schema: object,
+  body: object,
+): ValidateCredentialType {
+  const ajv = new Ajv();
+  const validate = ajv.compile(schema);
+  const valid = validate(body);
+  if (!valid) {
+    return {
+      status: false,
+      errors: validate.errors,
+    };
+  }
+  return {
+    status: true,
+    errors: null,
+  };
+}
+
 export function validateMessageRes(jwt: string): ValidateCredentialType {
-  let res;
-  res = validateCredential(shareRespSchema.v1, jwt);
+  let res = validateCredential(shareRespSchema.v1, jwt);
   const decoded: any = jwt_decode(jwt);
   const { vc } = decoded;
   if (res.status) {
-    vc.forEach((value: any) => {
-      const name = Object.keys(value.vc.credentialSubject);
-      const vcScjema = getSchemaByName(name[0]);
-      const vcJwt = encode.sign(value, name[0]);
-      res = validateCredential(vcScjema, vcJwt);
+    vc.forEach((credential: any) => {
+      const schemaName = Object.keys(credential.vc.credentialSubject);
+      res = validateSchema(getSchemaByName(schemaName[0]), credential);
     });
   }
   return res;
