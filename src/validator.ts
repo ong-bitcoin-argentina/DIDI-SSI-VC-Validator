@@ -2,7 +2,7 @@
 import Ajv from 'ajv';
 import jwt_decode from 'jwt-decode';
 import { getSchemaByName } from './credentialList';
-import { shareRespSchema } from './messages';
+import { shareResponseSchema } from './messages';
 
 type ValidateCredentialType = {
   status: boolean;
@@ -49,7 +49,7 @@ export function validateSchema(
 }
 
 export function validateMessageRes(jwt: string): ValidateCredentialType {
-  let res = validateCredential(shareRespSchema.v1, jwt);
+  let res = validateCredential(shareResponseSchema.v1, jwt);
   const decoded: any = jwt_decode(jwt);
   const { vc } = decoded;
   if (res.status) {
