@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 import Ajv from 'ajv';
 import jwt_decode from 'jwt-decode';
+import { getSchemaByName } from './credentialList';
+import { shareResponseSchema } from './messages';
 
 type ValidateCredentialType = {
   status: boolean;
@@ -44,4 +46,17 @@ export function validateSchema(
     status: true,
     errors: null,
   };
+}
+
+export function validateMessageRes(jwt: string): ValidateCredentialType {
+  let res = validateCredential(shareResponseSchema.v1, jwt);
+  const decoded: any = jwt_decode(jwt);
+  const { vc } = decoded;
+  if (res.status) {
+    vc.forEach((credential: any) => {
+      const schemaName = Object.keys(credential.vc.credentialSubject);
+      res = validateSchema(getSchemaByName(schemaName[0]), credential);
+    });
+  }
+  return res;
 }
