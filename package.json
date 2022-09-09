@@ -1,6 +1,6 @@
 {
   "name": "@proyecto-didi/vc-validator",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Verifiable Credentials validator",
   "main": "dist/index.js",
   "types": "dist/index.js",
